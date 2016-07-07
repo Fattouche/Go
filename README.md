@@ -1,6 +1,7 @@
 # Lab 4
 
 This is code template for SENG 299 Summer 2016 Lab 4. 
+test
 
 ## Purpose
 
