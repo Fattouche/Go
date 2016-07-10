@@ -4,6 +4,17 @@
  * 
  * @param cb {function} callback to call when the request comes back from the server.
  */
+ function getAccount(cb){
+    $.get("/data", function(data, textStatus, xhr){
+        console.log("Response for /data: "+textStatus);  
+
+        // handle any errors here....
+
+        // draw the board....
+        cb(data);  
+
+    }); 
+}
 function getData(cb){
     $.get("/data", function(data, textStatus, xhr){
         console.log("Response for /data: "+textStatus);  

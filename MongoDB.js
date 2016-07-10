@@ -1,24 +1,17 @@
 "use strict";
-/**
- * You must implement the methods in this
- * file to interact with the Mongo database.
- * 
- * Created by sdiemert on 2016-05-25.
- */
 
 // See https://github.com/mongodb/node-mongodb-native for details.
+//account should be {name:"", numberOfGames:"", win:"", lost:""}
 var MongoClient = require("mongodb").MongoClient;
-var DBAdapter   = require("./DBAdapter");
 
 
-class MongoDB extends DBAdapter {
+class MongoDB{
 
-    constructor(u, p, db, host, port) {
+    constructor(u, db, host, port) {
         super(u, p, db, host, port);
 
         this._user   = u;
-        this._passwd = p;
-        this._dbname = db || "timerdb";
+        this._dbname = db;
         this._host   = host || "localhost";
         this._port   = port || 27017;
 
@@ -68,45 +61,35 @@ class MongoDB extends DBAdapter {
      * @param callback {function} called when query finishes.
      *      Takes two parameters: 1) error parameter, 2) data returned from query.
      */
-    getAllTasks(callback) {
-		// Get the documents collection
-		var collection = this._db.collection('documents');
-	  // Find some documents
-		collection.find({}).toArray(function(err, docs) {
-		if(err){
-			callback(err,docs);
-		}
-		else{
-			callback(null,docs);
-		}
-  });
-        // TODO: IMPLEMENT ME
-        // See https://github.com/mongodb/node-mongodb-native for details.
+    getAllAccounts(callback) {
+
+        var collection = this._db.collection("Group7");
+
+        collection.find({}).toArray(function(err, data){
+            if(err){
+                callback(err, null);
+            }else{
+                callback(null, data);
+            }
+        });
 
     }
 
     /**
-     * Adds a task to the database.
+     * Adds a account to the database.
      *
-     * @param task {object} represents the task to be added to the DB.
+     * @param account {object} represents the account to be added to the DB.
      * @param callback {function} called when query finishes.
      *      Takes a single error parameter.
      */
-    addTask(task, callback) {
-		// Get the documents collection
-		var collection = this._db.collection('documents');
-		task.id=(new Date()).getTime();
-		 // Insert some documents
-		 collection.insert(task, function(err) {
-		if(err){
-			callback(err);
-		}
-		else{
-			callback(null);
-		}
-		});
-        // TODO: IMPLEMENT ME
-        // See https://github.com/mongodb/node-mongodb-native for details.
+    addAccount(account, callback) {
+
+        task.id = (new Date()).getTime(); 
+        var collection = this._db.collection("Group7");
+        collection.insertOne(account, function(err, result){
+            if(err) callback(err);
+            else callback(null);
+        });
 
     }
 
@@ -117,19 +100,13 @@ class MongoDB extends DBAdapter {
      * @param callback {function} called when remove is completed.
      */
     removeTask(id, callback) {
-		// Get the documents collection
-	  var collection = this._db.collection('documents');
-	  // Insert some documents
-	  collection.deleteOne(this.id, function(err, result) {
-		if(err){
-			callback(err);
-		}else{
-			callback(null);
-		}
-	  });
 
-        // TODO: IMPLEMENT ME
-        // See https://github.com/mongodb/node-mongodb-native for details.
+        var collection = this._db.collection("Group7");
+
+        collection.deleteOne({id : id}, function(err, data){
+            if(err || data.length !== 0) callback(err, null);
+            else callback(null, data[0]);
+        });
 
     }
 
