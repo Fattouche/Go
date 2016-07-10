@@ -102,7 +102,6 @@ lastEncountered=0;
 sameEncountered=true;
 function checkTerritory(board,x,y){
 	if(sameEncountered==false){
-		console.log("here!");
 		return 0;
 	}
 	if(y+1<board.length&&sameEncountered==true){
@@ -187,12 +186,8 @@ function checkTerritory(board,x,y){
 		}
 	}
 	if(y+1<board.length&&sameEncountered==true){
-		console.log("y+1");
-		console.log(board);
-		console.log("last Encountered: "+lastEncountered);
 		if(board[x][y+1]==0){
 			board[x][y]=99;
-			console.log("going Right");
 			lastEncountered=checkTerritory(board,x,y+1);
 			if(lastEncountered==0){
 				return 0;
@@ -201,12 +196,8 @@ function checkTerritory(board,x,y){
 		}
 	}
 	if(x+1<board.length&&sameEncountered==true){
-		console.log("x+1");
-		console.log(board);
-		console.log("last Encountered: "+lastEncountered);
 		if(board[x+1][y]==0){
 			board[x][y]=99;
-			console.log("going down");
 			lastEncountered=checkTerritory(board,x+1,y);
 			if(lastEncountered==0){
 				return 0;
@@ -216,12 +207,8 @@ function checkTerritory(board,x,y){
 	}
 	
 	if(y-1>=0&&sameEncountered==true){
-		console.log("y-1");
-		console.log(board);
-		console.log("last Encountered: "+lastEncountered);
 		if(board[x][y-1]==0){
 			board[x][y]=99;
-			console.log("going left");
 			lastEncountered=checkTerritory(board,x,y-1);
 			if(lastEncountered==0){
 				return 0;
@@ -231,13 +218,8 @@ function checkTerritory(board,x,y){
 	}
 	
 	if(x-1>=0&&sameEncountered==true){
-		console.log("x-1");
-		console.log(board);
-		console.log("last Encountered: "+lastEncountered);
-		console.log("why arent you going in here!");
 		if(board[x-1][y]==0){
 			board[x][y]=99;
-			console.log("going up");
 			lastEncountered=checkTerritory(board,x-1,y);
 			if(lastEncountered==0){
 				return 0;
@@ -398,7 +380,7 @@ describe('EndGame',function(){
 	arr[2][0]=2;
 	arr[1][8]=2;
 	
-	
+	/*
 	//console.log(isSurrounded(arr,3,5,1));
 	//console.log(arr);
 	//console.log(checkTerritory(arr,1,0));
@@ -413,7 +395,7 @@ describe('EndGame',function(){
 	console.log(arr);
 	state=PlayMove(arr1,arr,4,2,1);
 	console.log(state.Board);
-	/*console.log(arr);
+	console.log(arr);
 	if(checkMove(arr1,arr,0,7,1)){
 		arr[0][7]=1;
 		arr[0][8]=1;
@@ -424,7 +406,8 @@ describe('EndGame',function(){
 	arr=cleanBoard(arr);
 	console.log(arr);
 	console.log(countScore(arr));
-	console.log(arr);*/
+	console.log(arr);
+	*/
 });
 
 
