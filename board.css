@@ -12,6 +12,14 @@ li {
   float: left;
 }
 
+h1{
+	color: blue;
+	position: absolute;
+	left: 150px;
+	top: 350px;
+	font-size:300%;
+}
+
 #pass{
 	position:relative;
     bottom:10%;
