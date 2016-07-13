@@ -2,8 +2,9 @@
 
 var express    = require("express");
 var bodyParser = require("body-parser");
-var Storage = require('./lib/MongoDB');
+var Storage = require('MongoDB');
 var aiInterface = require("./aiInterface");
+var game = require('./game');
 var app = express();
 var db = new Storage(null, null, 'group7');
 // use the parse to get JSON objects out of the request. 
@@ -15,8 +16,8 @@ app.use(express.static('public'));
 var board = {
     size:null,
     color:null,
-    handicap: null//always 4 tokens set to player 1 or 2
-    mode: null // 1 is hot seat, 2 is play agianst AI
+    handicap: null,//always 4 tokens set to player 1 or 2
+    mode: null // 2 is hot seat, 1 is play agianst AI
 }
 var player1 = {username : null,  type : null};//type could be guest/ai
 var player2 = {username : null,  type : null};
@@ -99,7 +100,7 @@ function generateBoard(){
  */
 app.get("/initBoard", function (req, res) {
     console.log("GET Request to: /initBoard");
-    res.json(boardState; 
+    res.json(boardState); 
 });
 app.get("/accounts", function (req, res) {
     console.log("GET Request to: /accounts");
@@ -123,11 +124,7 @@ app.get("/move", function (req, res) {
 
 app.get("/aiMove", function (req, res) {
     console.log("GET Request to: /aiMove");
-    aiInterface.getRandomMove(boardState.size, boardState.board, lastMove, function(move){
-        boardState.board[move.x][move.y] = move.c;
-        lastMove = move; 
-        res.json(boardState);
-    });
+    getAiMove();
     res.json(boardState);
 });
 
@@ -141,19 +138,25 @@ app.get("/finish", function (req, res) {
 });
 app.get("/score", function (req, res) {
     console.log("GET Request to: /score");
-    //scoring
+    var score  = game.countScore(boardState.board);
     res.json(score);
 });
 app.post("/mode", function (req, res) {
     console.log("Post Request to: /mode");
-    board.mode = JSON.parse(req.body);
+    console.log(typeof(req.body));
+    console.log(req.body);
+    board.mode = req.body;
+    console.log(board.mode);
+    res.status(200).send();
 });
 app.post("/initBoard", function (req, res) {
     console.log("Post Request to: /initBoard");
-    var tempBoard = JSON.parse(req.body);
+    var tempBoard = req.body;
     board.size = tempBoard.size;
-    board.color = tempBoard.size;
-    board.handicap = tempBoard.handicap
+    board.color = tempBoard.color;
+    board.handicap = tempBoard.handicap;
+    console.log(board);
+    res.status(200).send();
 });
 app.post("/addAccount", function (req, res) {
 
@@ -185,34 +188,57 @@ app.post("/checkMove", function (req, res) {
 
 app.post("/placeMove", function (req, res) {
     console.log("POST Request to: /placeMove");
+    var tempMove = req.body;
     oldBoard1 = oldBoard2;
-    oldBoard2 = boardState;
-    var tempMove = JSON.parse(req.body);
-    lastmove.x = tempMove.x;
-    lastmove.y = tempMove.y;
-    boardState.board[lastmove.x][lastmove.y] = tempMove.c;
-    //need to capture
-    if(turn == 1){
-        turn ==2;
-    }else{
-        turn = 1;
+    oldBoard2 = boardState.board;
+    console.log("aaaaaaaaa");
+    console.log(toldBoard2);
+    console.log(tempMove);
+    if(tempMove.pass == true){
+           console.log("bbbbbbbbbbb");
+        pass++;
+        if(turn == 1){
+                turn ==2;
+        }else{
+                 turn = 1;
+        }
+
+    }else if(pass<2){
+           console.log("ccccccc");
+        pass = 0;
+        var newBoard = game.PlayMove(oldBoard1,oldBoard2,tempMove.x,tempMove.y,tempMove.c);
+        if(newBoard.played == true){
+               console.log("dddddddd");
+            lastmove.x = tempMove.x;
+            lastmove.y = tempMove.y;
+            lastmove.c = tempMove.c;
+            boardState.board = newBoard.board;
+            if(turn == 1){
+                turn ==2;
+            }else{
+                 turn = 1;
+            }
+            count++;
+            res.status(200).send();    
+        }
+        res.status(403).send();
     }
-    count++;
-
-
-    res.status(200).send();
 });
 app.post("/players", function (req, res) {
 
     console.log("POST Request to: /players");
-    var temp = JSON.parse(req.body);
+    var temp = req.body;
+    console.log(temp);
+    console.log(typeof(temp));
     player1.username = temp[0].username;
     player1.type = temp[0].type;
     player2.username = temp[1].username;
     player2.type = temp[1].type;
+    console.log(player1);
+    console.log(player2);
     res.status(200).send();
 });
-app.post("/account", function (req, res) ){
+app.post("/account", function (req, res){
      db.updateAccount(req.body, function(err){
         if(err){
             res.status(500).send();
@@ -220,8 +246,36 @@ app.post("/account", function (req, res) ){
             res.status(200).send();
         }
     });
-}
-
+});
 app.listen(process.env.PORT || 3000, function () {
     console.log("Listening on port 3000");
 });
+
+function getAiMove(){
+    aiInterface.getRandomMove(boardState.size, boardState.board, lastMove, function(move){
+        if(move.pass == true){
+            pass++;
+            if(turn == 1){
+             turn ==2;
+            }else{
+                turn = 1;
+            }
+        }else if(pass<2){
+            pass = 0;
+            var newBoard = game.PlayMove(oldBoard1,oldBoard2,move.x,move.y,move.c);
+            if(newBoard.played == true){
+                lastmove.x = move.x;
+                lastmove.y = move.y;
+                lastmove.c = move.c;
+                boardState.board = newBoard.board;
+                if(turn == 1){
+                    turn ==2;
+                }else{
+                     turn = 1;
+                }
+            count++;       
+            }
+        getAiMove();
+        }
+    });
+}
