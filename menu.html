@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <title>Menu</title>
+    <link href='css/menu.css' rel='stylesheet' type='text/css'>
+    <link href="css/abc.css" rel="stylesheet">
+    <link href="css/abc1.css" rel="stylesheet">
+    <script type="text/javascript" src="js/menu.js"></script>
+  </head>
+
+  <body>
+    <ul>
+      <li><a class="active" href="menu.html">Play Go</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+
+    <div class="buttonHolder">
+      <input class="button button1" value="2 Player" onClick="div_show()"/>
+      <input class="button button2" value="Play Against AI" onClick="div_show1()"/>
+    </div>
+
+    <div id="abc">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide()">
+        <h2>Please Login</h2>
+        <hr>
+        <table>
+        <tr>
+        <td><input id="name1" name="name" placeholder="Player 1" type="text"></td>
+        <td><input id="name2" name="name" placeholder="Player 2" type="text"></td>
+        </tr>
+        </table>
+        <br></br>
+        <a href="javascript:%20check_empty()" id="submit">Send</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+    <div id="abc1">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form1" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide1()">
+        <h2>Please Login</h2>
+        <hr>
+        <table>
+        <tr>
+        <td><input id="name3" name="name" placeholder="Player Name" type="text"></td>
+        </tr>
+        </table>
+        <br></br>
+        <a href="javascript:%20check_empty1()" id="submit">Send</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+  </body>
+</html>
