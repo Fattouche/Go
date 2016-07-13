@@ -98,6 +98,19 @@ font-size:20px;
 cursor:pointer;
 border-radius:5px
 }
+#guest {
+text-decoration:none;
+width:100%;
+text-align:center;
+display:block;
+background-color:#2A2E2D;
+color:#fff;
+border:1px solid #47ADA0;
+padding:10px 0;
+font-size:20px;
+cursor:pointer;
+border-radius:5px
+}
 span {
 color:red;
 font-weight:700

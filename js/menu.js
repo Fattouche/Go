@@ -1,4 +1,8 @@
 // Validating Empty Field
+function playGuest(){
+  window.location = 'boardmenu.html';
+}
+
 function check_empty() {
   if (document.getElementById('name1').value == "" || document.getElementById('name2').value == "") {
   alert("Fill All Fields !");
