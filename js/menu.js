@@ -42,19 +42,41 @@ function div_hide1(){
   document.getElementById('abc1').style.display = "none";
 }
 
-$("#submit").click(function () {
-  // var user = $('#name3').text;
-  // mode = {username1: , username2: ,win1: 0, win2: 0}
-  // $.ajax({
-  //     type: 'POST',
-  //     url : '/addAccount',
-  //     dataType: "json",
-  //     data : JSON.stringify(mode),
-  //     contentType : "application/json",
-  //     success : function(){
-  //         console.log("Response for /move" +status);
-  //     }
-  // });
+$("#submit2").click(function () {
+   var user1 = $('#name1').val();
+   var user2 = $('#name2').val();
+   var mode = {username1: user1, username2: user2, win1: 0, win2: 0}
+   $.ajax({
+      type: 'POST',
+      url : '/addAccount',
+      dataType: "json",
+      data : JSON.stringify(mode),
+      contentType : "application/json",
+      success : function(){
+          console.log("Response for /addAccount" +status);
+      }
+  });
+
+   $('#form')[0].reset();
+   $("#name1").text("");
+   $("#name2").text("");
+   $("#name3").text("");
+});
+
+
+$("#submit1").click(function () {
+   var user = $('#name3').val();
+   var mode = {username: user, win: 0}
+   $.ajax({
+      type: 'POST',
+      url : '/addAccount',
+      dataType: "json",
+      data : JSON.stringify(mode),
+      contentType : "application/json",
+      success : function(){
+          console.log("Response for /addAccount" +status);
+      }
+  });
 
    $('#form')[0].reset();
    $("#name1").text("");
