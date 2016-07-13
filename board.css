@@ -12,13 +12,27 @@ li {
   float: left;
 }
 
+
+
 h1{
 	color: blue;
-	position: absolute;
+	position: relative;
 	left: 150px;
 	top: 350px;
 	font-size:300%;
 }
+
+
+.fade_div {
+    display: none;
+    position: absolute;
+    background-color: red;
+    border: 1px solid black;
+    top:350px;
+    right: 100px
+}
+
+
 
 #pass{
 	position:relative;
@@ -36,6 +50,13 @@ h1{
     cursor: pointer;
 
 }
+
+circle:hover
+  {
+	fill-opacity:2;
+  }
+
+
 
 li a {
   display: block;
