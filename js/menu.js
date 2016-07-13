@@ -56,11 +56,8 @@ $("#submit2").click(function () {
           console.log("Response for /addAccount" +status);
       }
   });
-
-   $('#form')[0].reset();
-   $("#name1").text("");
-   $("#name2").text("");
-   $("#name3").text("");
+      $('#form').find('#name1').val('');
+      $('#form').find('#name2').val('');
 });
 
 
@@ -77,9 +74,5 @@ $("#submit1").click(function () {
           console.log("Response for /addAccount" +status);
       }
   });
-
-   $('#form')[0].reset();
-   $("#name1").text("");
-   $("#name2").text("");
-   $("#name3").text("");
+      $('#form1').find('#name3').val('');
 });

@@ -2,8 +2,9 @@
   <head>
     <title>Leaderboard</title>
     <link href='css/leaderboard.css' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" language="JavaScript"></script>
+    <link href="css/uppermenu.css" rel="stylesheet">
 
+    <script type="text/javascript" language="JavaScript"></script>
   </head>
   <body>
 
@@ -19,10 +20,13 @@
       </ul>
       <br></br>
       <ul id="info">
-        <p>Bob ------------------------------ 10</p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
       </ul>
       <br></br>
-      <button class="button" id="getAccounts" onClick="getAccount()">Get Accounts/Refresh</button>
+      <button class="button" id="getAccounts" onClick="getAccount(); writeAccount">Get Accounts/Refresh</button>
     </div>
 
   </body>
