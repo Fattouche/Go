@@ -1,0 +1,33 @@
+<html>
+    <head>
+		<link href='css/board.css' rel='stylesheet' type='text/css'>
+        <link href='/style.css' rel='stylesheet' type='text/css'>
+    </head>
+    <body>
+
+
+
+
+		<ul>
+			<li><a href="menu.html">Play Go</a></li>
+			<li><a href="leaderboard.html">Leaderboard</a></li>
+		</ul>
+
+
+        <h1 id="Turn">Player 1 turn!</h1>
+
+        <div style='width:100%;'>
+            <div id='canvas'>
+
+            </div>
+        </div>
+
+        <script src="jquery.min.js"></script>
+        <script src="svgFactory.js"></script>
+        <script src="script.js"></script>
+        <script>
+            init();
+        </script>
+		<button id="Pass" onclick="pass()">Pass</button>
+    </body>
+</html>
