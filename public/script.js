@@ -73,26 +73,14 @@ function guestes(){
     var players = [player1,player2];
     postPlayers(players);
 }
-function initBoard(){
-    var color = "pink";
-    var size = 9;
-     $.ajax({
-        type: 'POST',
-        url : '/initBoard',
-        dataType: "json",
-        data : JSON.stringify({size:size,color:color}), 
-        contentType : "application/json",
-        success : function(){
-            console.log("response for /players"+status);
-             
-        }
-    });
-}
+
 function startGame(){
     $.get("/initBoard", function(data, textStatus, xhr){
         console.log("Response for /initBoard: "+textStatus);  
         drawBoard(data);  
     }); 
+   
+
 }
 function play(){
     var move = {x:0,y:0,c:1, pass:false};

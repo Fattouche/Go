@@ -23,7 +23,7 @@ var player1 = {username : null,  type : null};//type could be guest/ai
 var player2 = {username : null,  type : null};
 var count = 0;
 var pass = 0;
-var boardState = generateBoard(); 
+var boardState = {board : null, size : 0}; 
 var oldBoard1 = [];
 var oldBoard2 = [];
 var lastMove = {x : 0, y : 0, c : 0, pass:false}; 
@@ -41,52 +41,53 @@ function generateBoard(){
     for(var i = 0; i < state.size; i++){
         tmp = []; 
         for(var j = 0; j < state.size; j++){
-            tmp.push(Math.floor(Math.random()*(2 - 0 + 1))); 
+            tmp.push(0); 
         }
-        state.board.push(tmp)
-        oldBoard2.push(tmp);
-        oldBoard1.push(tmp);
+        state.board.push(tmp);
+    
     }
     if(board.handicap == 1 ){
         if(board.size == 9){
-            boardState.board[2][2] = 1;
-            boardState.board[2][6] = 1;
-            boardState.board[6][2] = 1;
-            boardState.board[6][6] = 1;
+            state.board[2][2] = 1;
+            state.board[2][6] = 1;
+            state.board[6][2] = 1;
+            state.board[6][6] = 1;
         }
         if(board.size == 13){
-            boardState.board[3][3] = 1;
-            boardState.board[3][9] = 1;
-            boardState.board[9][3] = 1;
-            boardState.board[6][6] = 1;
+            state.board[3][3] = 1;
+            state.board[3][9] = 1;
+            state.board[9][3] = 1;
+            state.board[6][6] = 1;
         }
         if(board.size == 19){
-            boardState.board[3][3] = 1;
-            boardState.board[3][15] = 1;
-            boardState.board[15][3] = 1;
-            boardState.board[15][15] = 1;
+            state.board[3][3] = 1;
+            state.board[3][15] = 1;
+            state.board[15][3] = 1;
+            state.board[15][15] = 1;
         }
 
     }
      if(board.handicap == 2 ){
         if(board.size == 9){
-            boardState.board[2][2] = 2;
-            boardState.board[2][6] = 2;
-            boardState.board[6][2] = 2;
-            boardState.board[6][6] = 2;
+            state.board[2][2] = 2;
+            state.board[2][6] = 2;
+            state.board[6][2] = 2;
+            state.board[6][6] = 2;
         }
         if(board.size == 13){
-            boardState.board[3][3] = 2;
-            boardState.board[3][9] = 2;
-            boardState.board[9][3] = 2;
-            boardState.board[6][6] = 2;
+            state.board[3][3] = 2;
+            state.board[3][9] = 2;
+            state.board[9][3] = 2;
+            state.board[6][6] = 2;
         }
         if(board.size == 19){
-            boardState.board[3][3] = 2;
-            boardState.board[3][15] = 2;
-            boardState.board[15][3] = 2;
-            boardState.board[15][15] = 2;
+            state.board[3][3] = 2;
+            state.board[3][15] = 2;
+            state.board[15][3] = 2;
+            state.board[15][15] = 2;
         }
+        oldBoard2 = state.board;
+       oldBoard1 = state.board;
 
     }
     return state; 
@@ -100,6 +101,8 @@ function generateBoard(){
  */
 app.get("/initBoard", function (req, res) {
     console.log("GET Request to: /initBoard");
+    boardState = generateBoard();
+    console.log(boardState);
     res.json(boardState); 
 });
 app.get("/accounts", function (req, res) {
@@ -149,6 +152,27 @@ app.post("/mode", function (req, res) {
     console.log(board.mode);
     res.status(200).send();
 });
+app.post("/size", function (req, res) {
+    console.log("Post Request to: /size");
+    var size = req.body;
+    board.size = size.size;
+    console.log(board);
+    res.status(200).send();
+});
+app.post("/color", function (req, res) {
+    console.log("Post Request to: /color");
+    var color = req.body;
+    board.color = color.color;
+    console.log(board);
+    res.status(200).send();
+});
+app.post("/handi", function (req, res) {
+    console.log("Post Request to: /handi");
+    var handi = req.body;
+    board.handicap = handi.handi;
+    console.log(board);
+    res.status(200).send();
+});
 app.post("/initBoard", function (req, res) {
     console.log("Post Request to: /initBoard");
     var tempBoard = req.body;
@@ -192,7 +216,7 @@ app.post("/placeMove", function (req, res) {
     oldBoard1 = oldBoard2;
     oldBoard2 = boardState.board;
     console.log("aaaaaaaaa");
-    console.log(toldBoard2);
+    console.log(oldBoard2);
     console.log(tempMove);
     if(tempMove.pass == true){
            console.log("bbbbbbbbbbb");

@@ -1,71 +1,47 @@
 <html>
       <head>
         <title>Board Selection</title>
-        <link href='boardselection.css' rel='stylesheet' type='text/css'>
-        <h3>Please select the settings for your board:</h3>
-        <script type="text/javascript" language="JavaScript">
-            function clickedButton() {
-                window.location = 'boardmenu.html'
-            }
-
-            function myBoardSize() {
-                document.getElementById("boardSize").classList.toggle("show");
-            }
-
-            function myBoardColor() {
-                document.getElementById("boardColor").classList.toggle("show");
-            }
-
-            function myBoardHandi() {
-                document.getElementById("boardHandi").classList.toggle("show");
-            }
-
-            // Close the dropdown menu if the user clicks outside of it
-            window.onclick = function(event) {
-              if (!event.target.matches('.dropbtn')) {
-
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                  var openDropdown = dropdowns[i];
-                  if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                  }
-                }
-              }
-            }
-
-
-             </script>
+        <link href='css/boardselection.css' rel='stylesheet' type='text/css'>
+        <ul>
+          <li><a href="menu.html">Play Go</a></li>
+          <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+        <script src="jquery.min.js"></script>
+        <script src="svgFactory.js"></script>
+        <script src="script.js"></script>
+      <script type="text/javascript" src="js/boardmenu.js"></script>
       </head>
 
       <body>
+        <div id="box">
+          <div class="dropHolder">
+            <div class="dropdown">
+              <button onclick="myBoardSize()" class="dropbtn" id="sizename" name="Board Size">Board Size</button>
+              <div id="boardSize" class="dropdown-content">
+                <a id="9" onclick="toggle9()">9x9</a>
+                <a id="13" onclick="toggle13()">13x13</a>
+                <a id="19" onclick="toggle19()">19x19</a>
+              </div>
+            </div>
 
-        <div class="dropdown">
-          <button onclick="myBoardSize()" class="dropbtn">Board Size</button>
-          <div id="boardSize" class="dropdown-content">
-            <a id="9">9x9</a>
-            <a id="13">13x13</a>
-            <a id="19">19x19</a>
+            <div class="dropdown">
+              <button onclick="myBoardColor()" class="dropbtn" id="colorname">Board Color</button>
+              <div id="boardColor" class="dropdown-content">
+                <a id="light" onclick="togglelight()">Light Wood</a>
+                <a id="medium" onclick="togglemedium()">Medium Wood</a>
+                <a id="dark" onclick="toggledark()">Dark Wood</a>
+              </div>
+            </div>
+
+            <div class="dropdown">
+              <button onclick="myBoardHandi()" class="dropbtn" id="handiname">Handicap</button>
+              <div id="boardHandi" class="dropdown-content">
+                <a id="handi1" onclick="toggleplay1()">Player 1</a>
+                <a id="handi2" onclick="toggleplay2()">Player 2</a>
+              </div>
+            </div>
           </div>
+          <button type="button" onclick="startGame(),playGo()" class="button" id="playbutton">Play</button>
         </div>
-
-        <div class="dropdown">
-          <button onclick="myBoardColor()" class="dropbtn">Board Color</button>
-          <div id="boardColor" class="dropdown-content">
-            <a id="light">Light Wood</a>
-            <a id="medium">Medium Wood</a>
-            <a id="dark">Dark Wood</a>
-          </div>
-        </div>
-
-        <div class="dropdown">
-          <button onclick="myBoardHandi()" class="dropbtn">Handicap</button>
-          <div id="boardHandi" class="dropdown-content">
-            <a id="handi1">Player 1</a>
-            <a id="handi2">Player 2</a>
-          </div>
-        </div>
-
       </body>
  </html>
