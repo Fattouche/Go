@@ -1,5 +1,5 @@
 function playGo() {
-    window.location = 'GoBoard.html'
+    window.location = 'index.html'
 }
 
 function myBoardSize() {
@@ -33,6 +33,7 @@ function toggle9(sizename){
    if (el.firstChild.data == "Board Size" || el.firstChild.data == "13x13" || el.firstChild.data == "19x19"){
        el.firstChild.data = "9x9";
    }
+
 }
 
 function toggle13(sizename){

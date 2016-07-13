@@ -104,14 +104,16 @@ body {
 .show {display:block;}
 
 .dropHolder{
-  display: table-cell;
+  /*display: table-cell;*/
   text-align: center;
+  margin: 0 auto;
 }
 
 #box{
+  text-align: center;
   box-sizing: border-box;
   padding: 30px 5px;
-  display: table;
+  /*display: table;*/
   margin: 5% auto;
   border-radius: 8px;
   width: 1400px;
@@ -120,8 +122,8 @@ body {
 }
 
 .button {
-  position: relative;
-  display: table-row;;
+  margin-left: 82.2%;
+  margin-top: 8%;
   border-radius: 6px;
   background-color: #2A2E2D;
   color: white;
@@ -129,7 +131,6 @@ body {
   padding: 20px 32px;
   font-size: 20px;
   cursor: pointer;
-  margin: right;
 }
 
 .button:hover, .button:focus {
