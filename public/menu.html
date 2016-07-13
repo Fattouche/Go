@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>Menu</title>
+    <link href='menu.css' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" language="JavaScript">
+        function clicked2Player(){
+            window.location = 'login2.html'
+        }
+        function clickedAI(){
+            window.location = 'loginAI.html'
+        }
+    </script>
+
+  </head>
+  <body>
+
+  <ul>
+    <li><a class="active" href="menu.html">Home</a></li>
+    <li><a href="#news">Play Go</a></li>
+    <li><a href="leaderboard.html">Leaderboard</a></li>
+  </ul>
+
+    <input type="button" value="2 Player" onClick="clicked2Player()"/>
+    <input type="button" value="Play Against Computer" onClick="clickedAI()"/>
+  </body>
+</html>

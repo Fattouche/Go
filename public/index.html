@@ -1,23 +1,19 @@
-
 <html>
-    <head>
-        <link href='/style.css' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-    
-        <h1>My Go Board</h1>
+      <head>
+        <title>Login AI</title>
+        <h3>Please enter your username:</h3>
+        <script type="text/javascript" language="JavaScript">
+                  function clickedButton()
+            {
+                window.location = 'boardmenu.html'
+            }
+             </script>
+      </head>
 
-        <div style='width:100%;'>
-            <div id='canvas'>
+      <form name="login_form" method="post">
+            <input name="username" placeholder="Username">
 
-            </div>
-        </div>
-
-        <script src="jquery.min.js"></script>
-        <script src="svgFactory.js"></script>
-        <script src="script.js"></script>
-        <script>
-            init(); 
-        </script>
-    </body>
-</html>
+            <br><input type="button" value="Login" onClick="clickedButton()"/>
+            <input type="button" value="Guest" onClick="clickedButton()"/></br>
+      </form>
+ </html>

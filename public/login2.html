@@ -1,0 +1,21 @@
+<html>
+      <head>
+        <title>Login 2Player</title>
+        <h3>Please login Player 1 and Player 2:</h3>
+        <script type="text/javascript" language="JavaScript">
+                  function clickedButton()
+            {
+                window.location = 'boardmenu.html'
+            }
+             </script>
+         <script src="script.js"></script>
+      </head>
+
+      <form name="login_form" method="post">
+            <input name="username" placeholder="Player 1" id = "p1name">
+            <br></br>
+            <input name="username" placeholder="Player 2" id = "p2name">
+            <br><input type="button" value="Login" onClick="clickedButton(); playersLogIn()"/>
+            <input type="button" value="Guests" onClick="clickedButton(); guestsLogIn"/></br>
+      </form>
+ </html>

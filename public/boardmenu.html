@@ -1,0 +1,71 @@
+<html>
+      <head>
+        <title>Board Selection</title>
+        <link href='boardselection.css' rel='stylesheet' type='text/css'>
+        <h3>Please select the settings for your board:</h3>
+        <script type="text/javascript" language="JavaScript">
+            function clickedButton() {
+                window.location = 'boardmenu.html'
+            }
+
+            function myBoardSize() {
+                document.getElementById("boardSize").classList.toggle("show");
+            }
+
+            function myBoardColor() {
+                document.getElementById("boardColor").classList.toggle("show");
+            }
+
+            function myBoardHandi() {
+                document.getElementById("boardHandi").classList.toggle("show");
+            }
+
+            // Close the dropdown menu if the user clicks outside of it
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+
+
+             </script>
+      </head>
+
+      <body>
+
+        <div class="dropdown">
+          <button onclick="myBoardSize()" class="dropbtn">Board Size</button>
+          <div id="boardSize" class="dropdown-content">
+            <a id="9">9x9</a>
+            <a id="13">13x13</a>
+            <a id="19">19x19</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button onclick="myBoardColor()" class="dropbtn">Board Color</button>
+          <div id="boardColor" class="dropdown-content">
+            <a id="light">Light Wood</a>
+            <a id="medium">Medium Wood</a>
+            <a id="dark">Dark Wood</a>
+          </div>
+        </div>
+
+        <div class="dropdown">
+          <button onclick="myBoardHandi()" class="dropbtn">Handicap</button>
+          <div id="boardHandi" class="dropdown-content">
+            <a id="handi1">Player 1</a>
+            <a id="handi2">Player 2</a>
+          </div>
+        </div>
+
+      </body>
+ </html>

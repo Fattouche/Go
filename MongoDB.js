@@ -8,13 +8,12 @@ var MongoClient = require("mongodb").MongoClient;
 class MongoDB{
 
     constructor(u, db, host, port) {
-        super(u, p, db, host, port);
+       
 
         this._user   = u;
         this._dbname = db;
         this._host   = host || "localhost";
         this._port   = port || 27017;
-
         this._db = null;
 
     }
@@ -84,7 +83,7 @@ class MongoDB{
      */
     addAccount(account, callback) {
 
-        task.id = (new Date()).getTime(); 
+        //task.id = (new Date()).getTime(); 
         var collection = this._db.collection("Group7");
         collection.insertOne(account, function(err, result){
             if(err) callback(err);
@@ -93,17 +92,27 @@ class MongoDB{
 
     }
 
+    updateAccount(username, win, callback) {
+
+        
+        var collection = this._db.collection("Group7");
+        collection.update({username:username},{$win: {win: win+1}}, function(err, result){
+            if(err) callback(err);
+            else callback(null);
+        });
+
+    }
     /**
      * Remove a task from the database.
      *
      * @param id {number} id of object to remove.
      * @param callback {function} called when remove is completed.
      */
-    removeTask(id, callback) {
+    removeAccount(username, callback) {
 
         var collection = this._db.collection("Group7");
 
-        collection.deleteOne({id : id}, function(err, data){
+        collection.deleteOne({username : username}, function(err, data){
             if(err || data.length !== 0) callback(err, null);
             else callback(null, data[0]);
         });
