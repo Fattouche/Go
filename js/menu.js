@@ -43,8 +43,21 @@ function div_hide1(){
 }
 
 $("#submit").click(function () {
+  // var user = $('#name3').text;
+  // mode = {username1: , username2: ,win1: 0, win2: 0}
+  // $.ajax({
+  //     type: 'POST',
+  //     url : '/addAccount',
+  //     dataType: "json",
+  //     data : JSON.stringify(mode),
+  //     contentType : "application/json",
+  //     success : function(){
+  //         console.log("Response for /move" +status);
+  //     }
+  // });
+
    $('#form')[0].reset();
-    $("#name1").text("");
-    $("#name2").text("");
-    $("#name3").text("");
+   $("#name1").text("");
+   $("#name2").text("");
+   $("#name3").text("");
 });
