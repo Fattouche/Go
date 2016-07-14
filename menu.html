@@ -29,8 +29,14 @@
         <hr>
         <table>
         <tr>
-        <td><input id="name1" name="name" placeholder="Player 1" type="text"></td>
-        <td><input id="name2" name="name" placeholder="Player 2" type="text"></td>
+        <td><input id="name1" class="name" placeholder="Player 1" type="text" list="listid1"></td>
+            <datalist id='listid1'>
+                <option value='User'>User</option>
+            </datalist>
+        <td><input id="name2" class="name" placeholder="Player 2" type="text" list="listid2"></td>
+            <datalist id='listid2'>
+                <option value='User'>User</option>
+            </datalist>
         </tr>
         </table>
         <br></br>
@@ -52,7 +58,10 @@
         <hr>
         <table>
         <tr>
-        <td><input id="name3" name="name" placeholder="Player Name" type="text"></td>
+        <td><input id="name3" class="name" placeholder="Player Name" type="text" list="listid3"></td>
+          <datalist id='listid3'>
+              <option value='User'>User</option>
+          </datalist>
         </tr>
         </table>
         <br></br>

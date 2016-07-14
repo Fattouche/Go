@@ -1,8 +1,19 @@
+.name{
+  background-color: #41846B; /* Green */
+  color: white;
+  border-radius: 6px;
+}
+
+::-webkit-input-placeholder {
+   color: white;
+}
+
   body {
     background-image: url("img.jpg");
     background-repeat: initial;
     /*background-color: #535454;*/
   }
+
 
   .button {
     background-color: white; /* Green */

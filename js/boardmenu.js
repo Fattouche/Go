@@ -1,5 +1,11 @@
 function playGo() {
-    window.location = 'index.html'
+  var els = document.getElementById('sizename');
+  var elc = document.getElementById('colorname');
+  var eln = document.getElementById('handiname');
+
+  if(els.firstChild.data != "Board Size" && elc.firstChild.data != "Board Color"){
+    window.location = 'GoBoard.html'
+  } else alert("Please select all settings");
 }
 
 function myBoardSize() {

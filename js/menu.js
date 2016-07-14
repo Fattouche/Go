@@ -42,6 +42,8 @@ function div_hide1(){
   document.getElementById('abc1').style.display = "none";
 }
 
+
+
 $("#submit2").click(function () {
    var user1 = $('#name1').val();
    var user2 = $('#name2').val();
