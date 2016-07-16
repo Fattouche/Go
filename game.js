@@ -30,6 +30,13 @@ function countScore(board) {
   var player2score=0;
   for (i = 0; i < board.length; i++) {
     for (j = 0; j < board.length; j++) {
+		if(board[i][j]==4||board[i][j]==5){
+			board[i][j]=0;
+		}
+	  }
+	}
+  for (i = 0; i < board.length; i++) {
+    for (j = 0; j < board.length; j++) {
 		lastEncountered=0;
 		sameEncountered=true;
 	  if(board[i][j]==0){
@@ -103,11 +110,19 @@ function cleanBoard(board) {
 		  if(color==2)
 			var enemy=1;
 		  if (isSurrounded(board, i, j, color)) {
-			board[i][j] = enemy+3;
+			board[i][j] = 7;
 		  }
 	  }
     }
   }
+  for (i = 0; i < board.length; i++) {
+    for (j = 0; j < board.length; j++) {
+		if(board[i][j]==7){
+			board[i][j]=0;
+		}
+	}
+  }
+  
   return board;
 }
 
@@ -247,31 +262,28 @@ function checkTerritory(board,x,y){
 function isSurrounded(board, x, y, color) {
   //if one of the moves is empty then its not surrounded.
   if (y + 1 < board.length) {
-    if (board[x][y + 1] === 0||board[x][y + 1] === color+3) {
+    if (board[x][y + 1] === 0) {
       return false;
     }
   }
   if (x + 1 < board.length) {
-    if (board[x + 1][y] === 0||board[x+1][y] === color+3) {
+    if (board[x + 1][y] === 0) {
       return false;
     }
   }
   if (y - 1 >= 0) {
-    if (board[x][y - 1] === 0||board[x][y-1] === color+3) {
+    if (board[x][y - 1] === 0) {
       return false;
     }
   }
   if (x - 1 >= 0) {
-    if (board[x - 1][y] === 0||board[x-1][y] === color+3) {
+    if (board[x - 1][y] === 0) {
       return false;
     }
   }
-
+	
   if (x - 1 >= 0) {
-    if (board[x - 1][y] == color||board[x - 1][y] == color+3) {
-    	if(board[x - 1][y] == color+3){
-    		color=color+3;
-    	}
+    if (board[x - 1][y] == color) {
       board[x][y] = 99;
       Surrounded = isSurrounded(board, x - 1, y, color);
       board[x][y] = color;
@@ -283,10 +295,7 @@ function isSurrounded(board, x, y, color) {
   }
 
   if (x + 1 < board.length) {
-    if (board[x + 1][y] == color||board[x + 1][y] == color+3) {
-    	if(board[x + 1][y] == color+3){
-    		color=color+3;
-    	}
+    if (board[x + 1][y] == color) {
       board[x][y] = 99;
       Surrounded = isSurrounded(board, x + 1, y, color);
       board[x][y] = color;
@@ -296,10 +305,7 @@ function isSurrounded(board, x, y, color) {
     }
   }
   if (y + 1 < board.length) {
-    if (board[x][y + 1] == color||board[x][y + 1] == color+3) {
-    	if(board[x][y+1] == color+3){
-    		color=color+3;
-    	}
+    if (board[x][y + 1] == color) {
       board[x][y] = 99;
       Surrounded = isSurrounded(board, x, y + 1, color);
       board[x][y] = color;
@@ -309,10 +315,7 @@ function isSurrounded(board, x, y, color) {
     }
   }
   if (y - 1 >= 0) {
-    if (board[x][y - 1] == color||board[x][y - 1] == color+3) {
-    	if(board[x][y-1] == color+3){
-    		color=color+3;
-    	}
+    if (board[x][y - 1] == color) {
       board[x][y] = 99;
       Surrounded = isSurrounded(board, x, y - 1, color);
       board[x][y] = color;
