@@ -16,7 +16,7 @@ function getRandomMove(size, board, lastMove, cb){
 	var callback = function(response){
 		var str="";
 		response.on('data',function(chunk){
-			str+=chunk.toString();
+			str += chunk.toString();
 		});
 		response.on('end',function(){
 			console.log(str);

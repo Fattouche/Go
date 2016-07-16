@@ -75,7 +75,7 @@ function toggle19(sizename){
    $.ajax({
         type: 'POST',
         url : '/size',
-        data : JSON.stringify({size: 13}), 
+        data : JSON.stringify({size: 19}), 
         contentType : "application/json",
         success : function(data,textStatus,xhr){
             console.log("response for /size : "+textStatus);       

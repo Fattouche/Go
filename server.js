@@ -148,10 +148,7 @@ app.get("/accounts", function (req, res) {
         } 
      });   
 });
-// app.get("/isLegal", function (req, res) {
-//     console.log("GET Request to: /isLegal");
-//     res.json(islegal); 
-// });
+
 app.get("/move", function (req, res) {
     console.log("GET Request to: /move");
     res.json(boardState);
@@ -159,8 +156,79 @@ app.get("/move", function (req, res) {
 
 app.get("/aiMove", function (req, res) {
     console.log("GET Request to: /aiMove");
-    getAiMove();
+    console.log("inside of getAimove");
+    aiInterface.getRandomMove(boardState.size, boardState.board, lastMove, function(move){
+        console.log("inside of getAimove2222");
+ 
+
+    if(move.pass == true){
+        console.log("bbbbbbbbbbb");
+        lastMove.x = 0;
+        lastMove.y = 0;
+        lastMove.c = 0;
+        lastMove.pass = true;
+        pass++;
+        count++;
+        if(turn.c == 1 ){
+                turn.c =2;
+        }else{
+                 turn.c = 1;
+        }
+    }else if(pass<2){
+        for(var i = 0; i < board.size; i++){
+            oldBoard1[i] = oldBoard2[i].slice();
+        
+        }
+        for(var i = 0; i < board.size; i++){
+            oldBoard2[i] = boardState.board[i].slice();
+        }
+
+    console.log(oldBoard1);
+    console.log(oldBoard2);
+        var tempBoard1 = [];
+        var tempBoard2 = [];
+        for(var i = 0; i < board.size; i++){
+            tempBoard2[i] = oldBoard2[i].slice();
+        
+        }
+        for(var i = 0; i < board.size; i++){
+            tempBoard1[i] = oldBoard1[i].slice();
+        }
+        console.log("ccccccc");
+        pass = 0;
+        var newBoard = game.PlayMove(tempBoard1,tempBoard2,move.x,move.y,move.c);
+        if(newBoard.Played == true || count < 2){
+            console.log("dddddddd");
+            count++;
+            lastMove.x = move.x;
+            lastMove.y = move.y;
+            lastMove.c = move.c;
+            lastMove.pass = false;
+            for(var i = 0; i < board.size; i++){
+                    boardState.board[i] = newBoard.Board[i].slice();
+            }
+            console.log(boardState.board);
+            if(turn.c == 1){
+                turn.c = 2;
+            }else{
+                 turn.c = 1;
+            }   
+            
+        }else{
+             if(turn.c == 1){
+                turn.c = 2;
+            }else{
+                 turn.c = 1;
+            }   
+            
+            //getAimove();
+        }
+    }
+
+    console.log(boardState);
     res.json(boardState);
+    });
+    
 });
 app.get("/turn", function (req, res) {
     console.log("GET Request to: /turn");
@@ -177,13 +245,17 @@ app.get("/turn", function (req, res) {
 
 app.get("/finish", function (req, res) {
     console.log("GET Request to: /finish");
-    res.json(pass);
+    res.json({pass: pass});
 });
 
 app.get("/score", function (req, res) {
     console.log("GET Request to: /score");
-    var score  = game.countScore(boardState.board);
-    res.json(score);
+    newboard = [];
+    for(var i = 0; i < board.size; i++){
+        newboard[i] = boardState.board[i].slice();
+    }
+    var score  = game.countScore(newboard);
+    res.json({score:score});
 });
 
 
@@ -231,31 +303,44 @@ app.post("/addAccount", function (req, res) {
 app.post("/placeMove", function (req, res) {
     console.log("POST Request to: /placeMove");
     var tempMove = req.body;
-    for(var i = 0; i < board.size; i++){
-        oldBoard1[i] = oldBoard2[i].slice();
-        
-    }
-    for(var i = 0; i < board.size; i++){
-        oldBoard2[i] = boardState.board[i].slice();
-    }
-
-    console.log(oldBoard1);
-    console.log(oldBoard2);
+    
     if(tempMove.pass == true){
         console.log("bbbbbbbbbbb");
+        lastMove.x = 0;
+        lastMove.y = 0;
+        lastMove.c = 0;
         lastMove.pass = true;
         pass++;
         count++;
         if(turn.c == 1 ){
-                turn.c ==2;
+                turn.c =2;
         }else{
                  turn.c = 1;
         }
         res.status(200).send();  
     }else if(pass<2){
+        for(var i = 0; i < board.size; i++){
+        oldBoard1[i] = oldBoard2[i].slice();
+        
+        }
+        for(var i = 0; i < board.size; i++){
+            oldBoard2[i] = boardState.board[i].slice();
+        }
+        var tempBoard1 = [];
+        var tempBoard2 = [];
+        for(var i = 0; i < board.size; i++){
+            tempBoard2[i] = oldBoard2[i].slice();
+        
+        }
+        for(var i = 0; i < board.size; i++){
+            tempBoard1[i] = oldBoard1[i].slice();
+        }
+
+        console.log(oldBoard1);
+        console.log(oldBoard2);
         console.log("ccccccc");
         pass = 0;
-        var newBoard = game.PlayMove(oldBoard1,oldBoard2,tempMove.x,tempMove.y,tempMove.c);
+        var newBoard = game.PlayMove(tempBoard1,tempBoard2,tempMove.x,tempMove.y,tempMove.c);
         if(newBoard.Played == true || count < 4){
             console.log("dddddddd");
             count++;
@@ -303,66 +388,69 @@ app.post("/account", function (req, res){
         }
     });
 });
+
 app.listen(process.env.PORT || 3000, function () {
     console.log("Listening on port 3000");
 });
 
-function getAiMove(){ 
-     console.log("inside of getAimove");
-    aiInterface.getRandomMove(boardState.size, boardState.board, lastMove, function(move){
-        console.log("inside of getAimove2222");
-    for(var i = 0; i < board.size; i++){
-        oldBoard1[i] = oldBoard2[i].slice();
+// function getAiMove(cb){ 
+//      console.log("inside of getAimove");
+//     aiInterface.getRandomMove(boardState.size, boardState.board, lastMove, function(move){
+//         console.log("inside of getAimove2222");
+//     for(var i = 0; i < board.size; i++){
+//         oldBoard1[i] = oldBoard2[i].slice();
         
-    }
-    for(var i = 0; i < board.size; i++){
-        oldBoard2[i] = boardState.board[i].slice();
-    }
+//     }
+//     for(var i = 0; i < board.size; i++){
+//         oldBoard2[i] = boardState.board[i].slice();
+//     }
 
-    console.log(oldBoard1);
-    console.log(oldBoard2);
-    if(move.pass == true){
-        console.log("bbbbbbbbbbb");
-        lastMove.x = 0;
-        lastMove.y = 0;
-        lastMove.c = 0;
-        lastMove.pass = true;
-        pass++;
-        count++;
-        if(turn.c == 1 ){
-                turn.c =2;
-        }else{
-                 turn.c = 1;
-        }
-    }else if(pass<2){
-        console.log("ccccccc");
-        pass = 0;
-        var newBoard = game.PlayMove(oldBoard1,oldBoard2,move.x,move.y,move.c);
-        if(newBoard.Played == true || count < 2){
-            console.log("dddddddd");
-            count++;
-            lastMove.x = move.x;
-            lastMove.y = move.y;
-            lastMove.c = move.c;
-            lastMove.pass = false;
-            for(var i = 0; i < board.size; i++){
-                    boardState.board[i] = newBoard.Board[i].slice();
-            }
-            if(turn.c == 1){
-                turn.c = 2;
-            }else{
-                 turn.c = 1;
-            }   
+//     console.log(oldBoard1);
+//     console.log(oldBoard2);
+//     if(move.pass == true){
+//         console.log("bbbbbbbbbbb");
+//         lastMove.x = 0;
+//         lastMove.y = 0;
+//         lastMove.c = 0;
+//         lastMove.pass = true;
+//         pass++;
+//         count++;
+//         if(turn.c == 1 ){
+//                 turn.c =2;
+//         }else{
+//                  turn.c = 1;
+//         }
+//     }else if(pass<2){
+//         console.log("ccccccc");
+//         pass = 0;
+//         var newBoard = game.PlayMove(oldBoard1,oldBoard2,move.x,move.y,move.c);
+//         if(newBoard.Played == true || count < 2){
+//             console.log("dddddddd");
+//             count++;
+//             lastMove.x = move.x;
+//             lastMove.y = move.y;
+//             lastMove.c = move.c;
+//             lastMove.pass = false;
+//             for(var i = 0; i < board.size; i++){
+//                     boardState.board[i] = newBoard.Board[i].slice();
+//             }
+//             console.log(boardState.board);
+//             if(turn.c == 1){
+//                 turn.c = 2;
+//             }else{
+//                  turn.c = 1;
+//             }   
             
-        }else{
-             if(turn.c == 1){
-                turn.c = 2;
-            }else{
-                 turn.c = 1;
-            }   
+//         }else{
+//              if(turn.c == 1){
+//                 turn.c = 2;
+//             }else{
+//                  turn.c = 1;
+//             }   
             
-            getAimove();
-        }
-    }
-    });
-}
+//             //getAimove();
+//         }
+//     }
+//     });
+//     cb();
+// }
