@@ -1,0 +1,80 @@
+<html>
+  <head>
+    <title>Menu</title>
+    <link href='css/menu.css' rel='stylesheet' type='text/css'>
+    <link href="css/abc.css" rel="stylesheet">
+    <link href="css/abc1.css" rel="stylesheet">
+    <link href="css/uppermenu.css" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+    <script src="svgFactory.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+  </head>
+
+  <body>
+    <ul>
+      <li><a class="active" href="menu.html">Play Go</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+
+    <div class="buttonHolder">
+      <input class="button button1" value="2 Player" onClick="div_show();twoPlayer()"/>
+      <input class="button button2" value="Play Against AI" onClick="div_show1();onePlayer()"/>
+    </div>
+
+    <div id="abc">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide()">
+        <h2>Please Login</h2>
+        <hr>
+        <table>
+        <tr>
+        <td><input id="name1" class="name" placeholder="Player 1" type="text" list="listid1"></td>
+            <datalist id='listid1'>
+                <option value='User'>User</option>
+            </datalist>
+        <td><input id="name2" class="name" placeholder="Player 2" type="text" list="listid2"></td>
+            <datalist id='listid2'>
+                <option value='User'>User</option>
+            </datalist>
+        </tr>
+        </table>
+        <br></br>
+        <a href="javascript:%20check_empty()" id="submit2">Login</a>
+        <br>
+        <a href="javascript:%20playGuest()" id="guest" onClick="guests()">Play as Guest</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+    <div id="abc1">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form1" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide1()">
+        <h2>Please Login</h2>
+        <hr>
+        <table>
+        <tr>
+        <td><input id="name3" class="name" placeholder="Player Name" type="text" list="listid3"></td>
+          <datalist id='listid3'>
+              <option value='User'>User</option>
+          </datalist>
+        </tr>
+        </table>
+        <br></br>
+        <a href="javascript:%20check_empty1()" id="submit1">Login</a>
+        <br>
+        <a href="javascript:%20playGuest()" id="guest" onClick="aiGuest()">Play as Guest</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+  </body>
+</html>

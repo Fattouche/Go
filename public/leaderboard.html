@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Leaderboard</title>
+    <link href='css/leaderboard.css' rel='stylesheet' type='text/css'>
+    <link href="css/uppermenu.css" rel="stylesheet">
+
+    <script type="text/javascript" language="JavaScript"></script>
+  </head>
+  <body>
+
+    <ul>
+      <li><a href="menu.html">Play Go</a></li>
+      <li><a class="active" href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+
+    <div id="box">
+      <ul id="titles">
+        <a>Account Name</a>
+        <a>Wins</a>
+      </ul>
+      <br></br>
+      <ul id="info">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+      </ul>
+      <br></br>
+      <button class="button" id="getAccounts" onClick="getallAccounts(); writeAccount">Get Accounts/Refresh</button>
+    </div>
+
+  </body>
+</html>
