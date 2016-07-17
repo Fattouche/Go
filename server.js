@@ -2,7 +2,7 @@
 
 var express    = require("express");
 var bodyParser = require("body-parser");
-var Storage = require('MongoDB');
+var Storage = require('./MongoDB');
 var aiInterface = require("./aiInterface");
 var game = require('./game');
 var app = express();
@@ -289,7 +289,7 @@ app.post("/addAccount", function (req, res) {
 
     console.log("POST Request to: /addAccount");
     
-    db.addAcccount(req.body, function(err){
+    db.addAccount(req.body, function(err){
         if(err){
             res.status(500).send();
         }else{
@@ -391,6 +391,9 @@ app.post("/account", function (req, res){
 
 app.listen(process.env.PORT || 3000, function () {
     console.log("Listening on port 3000");
+     db.connect(function(){
+        // some message here....
+    });
 });
 
 // function getAiMove(cb){ 

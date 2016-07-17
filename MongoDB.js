@@ -7,15 +7,14 @@ var MongoClient = require("mongodb").MongoClient;
 
 class MongoDB{
 
-    constructor(u, db, host, port) {
+    constructor(u, p, db, host, port) {
        
-
         this._user   = u;
+        this._passwd = p;
         this._dbname = db;
         this._host   = host || "localhost";
         this._port   = port || 27017;
-        this._db = null;
-
+        this._db = db;
     }
 
     /**
@@ -62,7 +61,7 @@ class MongoDB{
      */
     getAllAccounts(callback) {
 
-        var collection = this._db.collection("Group7");
+        var collection = this._db.collection("accounts");
 
         collection.find({}).toArray(function(err, data){
             if(err){
@@ -84,7 +83,7 @@ class MongoDB{
     addAccount(account, callback) {
 
         //task.id = (new Date()).getTime(); 
-        var collection = this._db.collection("Group7");
+        var collection = this._db.collection("accounts");
         collection.insertOne(account, function(err, result){
             if(err) callback(err);
             else callback(null);
@@ -95,7 +94,7 @@ class MongoDB{
     updateAccount(username, win, callback) {
 
         
-        var collection = this._db.collection("Group7");
+        var collection = this._db.collection("accounts");
         collection.update({username:username},{$win: {win: win+1}}, function(err, result){
             if(err) callback(err);
             else callback(null);
@@ -110,7 +109,7 @@ class MongoDB{
      */
     removeAccount(username, callback) {
 
-        var collection = this._db.collection("Group7");
+        var collection = this._db.collection("accounts");
 
         collection.deleteOne({username : username}, function(err, data){
             if(err || data.length !== 0) callback(err, null);
