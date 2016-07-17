@@ -269,8 +269,8 @@ function drawNewBoard(state){
     //svg.append(makeRectangle(lines, lines, W-2*lines, W-2*lines,"lightwood"));
     var i=1;
     while(i<=size){
-        svg.append(makeLine(lines, space, W-lines, space, 'black', 'rgb(255,0,0)'));
-        svg.append(makeLine(space, lines, space, W-lines, 'black', 'rgb(255,0,0'));
+        svg.append(makeLine(lines, space, W-lines, space, 'white', 'rgb(255,0,0)'));
+        svg.append(makeLine(space, lines, space, W-lines, 'white', 'rgb(255,0,0'));
         space += lines;
         i++
     }
@@ -316,7 +316,7 @@ function click(cb){
                 if(ax>30){
                     nposX = Math.ceil((e.pageX-posX)/60)*60;
                 }
-              if(ay>30){
+				if(ay>30){
                     nposY = Math.ceil((e.pageY-posY)/60)*60;
                 }
                 if(nposY == 0){
@@ -359,16 +359,16 @@ function click(cb){
                 if(nposX == 0){
                     nposX = nposX+43;
                 }
-                if(nposY > 558){
+                if(nposY > 565){
                     nposY = 558;
                 }
-                if(nposX > 558){
+                if(nposX > 565){
                     nposX = 558;
                 }
                 move.x=((nposY/43)-1);
                 move.y=((nposX/43)-1);
-            //arr[((nposY/43)-1)][((nposX/43)-1)]= 1;
-            console.log("call play2");
+				//arr[((nposY/43)-1)][((nposX/43)-1)]= 1;
+				console.log("call play2");
                 cb(move);
             }
             if(size==19){
@@ -393,14 +393,14 @@ function click(cb){
                 if(nposX == 0){
                     nposX = nposX+30;
                 }
-                if(nposY > 569){
+                if(nposY > 575){
                     nposY = 569;
                 }
-                if(nposX > 569){
+                if(nposX > 575){
                     nposX = 569;
                 }
-                move.x=(nposY/30)-1;
-                move.y=(nposX/30)-1;
+				move.x=(nposY/30)-1;
+				move.y=(nposX/30)-1;
                 //arr[((nposY/30)-1)][((nposX/30)-1)]= 1;
                 console.log("call play3");
                 cb(move);
