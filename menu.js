@@ -1,4 +1,28 @@
 // Validating Empty Field
+function createAcc1(){
+  div_hide();
+  div_hide1();
+  div_show3();
+}
+
+function createAcc2(){
+  div_hide();
+  div_hide1();
+  div_show3();
+}
+
+function createLogin2(){
+  div_hide3();
+  div_show();
+  $('#form3').find('#name4').val('');
+}
+
+function createLogin1(){
+  div_hide3();
+  div_show1();
+  $('#form3').find('#name4').val('');
+}
+
 function playGuest(){
   window.location = 'boardmenu.html';
 }
@@ -7,8 +31,46 @@ function check_empty() {
   if (document.getElementById('name1').value == "" || document.getElementById('name2').value == "") {
   alert("Fill All Fields !");
   } else {
-      document.getElementById('form').submit();
+      // document.getElementById('form').submit();
       window.location = 'boardmenu.html';
+  }
+}
+
+//Function To Display Popup
+function div_show3() {
+  document.getElementById('create').style.display = "block";
+}
+
+//Function to Hide Popup
+function div_hide3(){
+  document.getElementById('create').style.display = "none";
+}
+
+// Validating Empty Field
+function check_empty3() {
+  if (document.getElementById('name4').value == "") {
+  alert("Fill All Fields !");
+  } else {
+    $.get("/board", function(data, textStatus, xhr){
+        if(data.mode == 2){
+            createLogin2();
+        }
+        if(data.mode == 1){
+            createLogin1();
+        }
+
+    });
+
+  }
+}
+
+// Validating Empty Field
+function check_empty4() {
+  if (document.getElementById('name4').value == "") {
+  alert("Fill All Fields !");
+  } else {
+      // document.getElementById('form1').submit();
+      createLogin1();
   }
 }
 
@@ -41,6 +103,8 @@ function div_show1() {
 function div_hide1(){
   document.getElementById('abc1').style.display = "none";
 }
+
+
 
 $("#submit2").click(function () {
    var user1 = $('#name1').val();
