@@ -10,9 +10,11 @@ The implementation follows the functional requirments specified in the design an
 
 ## Usage
 
-To run the server: 
+To run the applicatiom: 
 
 1. Checkout/download the code: `git clone https://github.com/Fattouche/Go/'
-2. Start the server: `node server.js`
+2. Download the dependencies:a)'npm install jquery' b) 'npm install body-parser' c)'npm install mongodb' d)'npm install express'
+2. Start the server: `node server.js` (You must download Node if not already installed)
+3. Start the database 
 
-Navigate to `http://localhost:3000` to view the web appliation.
+Navigate to `http://localhost:3000/boardMenu.html` to view the web appliation.
