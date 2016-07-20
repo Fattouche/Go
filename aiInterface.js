@@ -5,7 +5,7 @@ console.log("inside of aiInterface");
 function getRandomMove(size, board, lastMove, cb){
 	var options = {
 		host:'roberts.seng.uvic.ca',
-		path:'/ai/attackEnemy',
+		path:'/ai/maxLibs',
 		port: '30000',
 		method: 'POST',
 		headers:{
