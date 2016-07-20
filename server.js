@@ -265,7 +265,6 @@ app.post("/addAccount", function (req, res) {
         }
     });
     
-    res.status(200).send();
 });
 
 app.post("/placeMove", function (req, res) {
