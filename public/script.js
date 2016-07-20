@@ -282,21 +282,18 @@ function play(loc){
                      if(move.c == 1 &&modemode == 2){
                         console.log("invalid 1");
                         ChangeText(iBubbles1[0]);
-                        $('svg').remove();
-                        drawBoard(temp,click);
+                   
                     }
                      if(move.c == 2 &&modemode == 2){
                              console.log("invalid 2");
                         ChangeText(iBubbles2[0]);
-                        $('svg').remove();
-                        drawBoard(temp,click);
+                       
                     }    
                     if(move.c ==1 &&modemode == 1){
                              console.log("invalid 3");
                          var randomNum1 = Math.floor(Math.random() * ibubblesAI.length);
                          ChangeText(ibubblesAI[randomNum1]);
-                         $('svg').remove();
-                        drawBoard(temp,click);
+                
                       
                     }
                 },
