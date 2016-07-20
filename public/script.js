@@ -293,8 +293,8 @@ function play(loc){
                     }    
                     if(move.c ==1 &&modemode == 1){
                              console.log("invalid 3");
-                         var randomNum1 = Math.floor(Math.random() * sBubblesAi.length);
-                         ChangeText(iBubblesAI[randomNum1]);
+                         var randomNum1 = Math.floor(Math.random() * ibubblesAI.length);
+                         ChangeText(ibubblesAI[randomNum1]);
                          $('svg').remove();
                         drawBoard(temp,click);
                       
