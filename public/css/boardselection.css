@@ -1,5 +1,3 @@
-
-
 body {
   background-image: url("img.jpg");
   background-repeat: initial;
@@ -56,11 +54,11 @@ body {
 }
 
 #medium{
-  background-image: url(mediumwood.png);
+  background-image: url(poke.jpeg);
 }
 
 #dark{
-  background-image: url(darkwood.png);
+  background-image: url(hellokitty.jpeg);
 }
 
 /* Change color of dropdown links on hover */

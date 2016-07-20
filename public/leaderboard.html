@@ -3,7 +3,9 @@
     <title>Leaderboard</title>
     <link href='css/leaderboard.css' rel='stylesheet' type='text/css'>
     <link href="css/uppermenu.css" rel="stylesheet">
-
+    <script src="jquery.min.js"></script>
+    <script src="svgFactory.js"></script>
+    <script src="script.js"></script>
     <script type="text/javascript" language="JavaScript"></script>
   </head>
   <body>
@@ -17,16 +19,17 @@
       <ul id="titles">
         <a>Account Name</a>
         <a>Wins</a>
+        <a>Losses</a>
       </ul>
       <br></br>
       <ul id="info">
-        <p></p>
+        <p id="response"></p>
         <p></p>
         <p></p>
         <p></p>
       </ul>
       <br></br>
-      <button class="button" id="getAccounts" onClick="getallAccounts(); writeAccount">Get Accounts/Refresh</button>
+      <button class="button" id="getAccounts" onClick="getAllAccounts(); ">Get Accounts/Refresh</button>
     </div>
 
   </body>

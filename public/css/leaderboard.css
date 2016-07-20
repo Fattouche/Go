@@ -1,4 +1,5 @@
 body {
+
   background-image: url("img.jpg");
   background-repeat: initial;
 }
@@ -16,14 +17,14 @@ body {
 
 #info{
     list-style-type: none;
-    height: 40px;
+    height: 425px;
     margin: 0;
     padding-left: 3%;
-    overflow: hidden;
     border-radius: 4px;
     border: 2px dotted #47ADA0;
     background-color: #2A2E2D;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 a{
@@ -36,7 +37,11 @@ a{
 }
 
 p{
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  padding: 20px 38px;
   color: white;
+  font-size: 20px;
 }
 
 #box{

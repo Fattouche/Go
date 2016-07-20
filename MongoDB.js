@@ -88,14 +88,26 @@ class MongoDB{
             if(err) callback(err);
             else callback(null);
         });
+        collection.createIndex( {username : account.username}, { unique: true } );
 
     }
 
-    updateAccount(username, win, callback) {
+    updateWin(user, callback) {
 
-        
+        console.log(user);
         var collection = this._db.collection("accounts");
-        collection.update({username:username},{$win: {win: win+1}}, function(err, result){
+        collection.update({username:user.username},{$inc:{win: 1}}, function(err, result){
+            if(err) callback(err);
+            else callback(null);
+        });
+
+    }
+
+    updateLoss(user, callback) {
+
+        console.log(user);
+        var collection = this._db.collection("accounts");
+        collection.update({username:user.username},{$inc: {loss: 1}}, function(err, result){
             if(err) callback(err);
             else callback(null);
         });

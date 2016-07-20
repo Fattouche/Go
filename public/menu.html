@@ -4,11 +4,15 @@
     <link href='css/menu.css' rel='stylesheet' type='text/css'>
     <link href="css/abc.css" rel="stylesheet">
     <link href="css/abc1.css" rel="stylesheet">
+    <link href="css/create.css" rel="stylesheet">
     <link href="css/uppermenu.css" rel="stylesheet">
     <script src="jquery.min.js"></script>
     <script src="svgFactory.js"></script>
     <script src="script.js"></script>
     <script type="text/javascript" src="js/menu.js"></script>
+      <script>
+        init();
+    </script>
   </head>
 
   <body>
@@ -18,9 +22,30 @@
     </ul>
 
     <div class="buttonHolder">
-      <input class="button button1" value="2 Player" onClick="div_show();twoPlayer()"/>
-      <input class="button button2" value="Play Against AI" onClick="div_show1();onePlayer()"/>
+      <input class="button button1" value="Play With Friends" onClick="div_show();twoPlayer();getMainAccounts();"/>
+      <input class="button button2" value="Play Against Simon" onClick="div_show1();onePlayer();getMainAccounts();"/>
     </div>
+
+    <div id="create">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form3" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide3()">
+        <h2>Please Login</h2>
+        <hr>
+        <table>
+        <tr>
+        <td><input id="name4" class="name" placeholder="Player Name" type="text"</td>
+        </tr>
+        </table>
+        <br>
+        <a href="javascript:%20check_empty3()" id="createA">Create Account</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
 
     <div id="abc">
     <!-- Popup Div Starts Here -->
@@ -32,18 +57,22 @@
         <hr>
         <table>
         <tr>
-        <td><input id="name1" class="name" placeholder="Player 1" type="text" list="listid1"></td>
-            <datalist id='listid1'>
-                <option value='User'>User</option>
-            </datalist>
-        <td><input id="name2" class="name" placeholder="Player 2" type="text" list="listid2"></td>
-            <datalist id='listid2'>
-                <option value='User'>User</option>
-            </datalist>
+        <td>
+          <select id="name1">
+              <option value='User' id="user1"></option>
+          </select>
+        </td>
+        <td>
+          <select id="name2">
+              <option value='User' id="user2"></option>
+          </select>
+        </td>
         </tr>
         </table>
-        <br></br>
-        <a href="javascript:%20check_empty()" id="submit2">Login</a>
+        <br>
+        <a href="javascript:%20createAcc2()" id="createA">Create Account</a>
+        <br>
+        <a href="javascript:%20check_empty()" id="submit2" onclick="logins()">Login</a>
         <br>
         <a href="javascript:%20playGuest()" id="guest" onClick="guests()">Play as Guest</a>
         </form>
@@ -61,14 +90,17 @@
         <hr>
         <table>
         <tr>
-        <td><input id="name3" class="name" placeholder="Player Name" type="text" list="listid3"></td>
-          <datalist id='listid3'>
-              <option value='User'>User</option>
-          </datalist>
+        <td>
+          <select id="name3">
+              <option value='User' id="user3"></option>
+          </select>
+        </td>
         </tr>
         </table>
-        <br></br>
-        <a href="javascript:%20check_empty1()" id="submit1">Login</a>
+        <br>
+        <a href="javascript:%20createAcc1()" id="createA">Create Account</a>
+        <br>
+        <a href="javascript:%20check_empty1()" id="submit1" onclick="aiLogin()">Login</a>
         <br>
         <a href="javascript:%20playGuest()" id="guest" onClick="aiGuest()">Play as Guest</a>
         </form>

@@ -85,7 +85,7 @@ function toggle19(sizename){
 
 function togglelight(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Medium Wood" || el.firstChild.data == "Dark Wood"){
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Pokemon" || el.firstChild.data == "Hello Kitty"){
        el.firstChild.data = "Light Wood";
    }
    $.ajax({
@@ -102,8 +102,8 @@ function togglelight(colorname){
 
 function togglemedium(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Dark Wood") {
-       el.firstChild.data = "Medium Wood";
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Hello Kitty") {
+       el.firstChild.data = "Pokemon";
    }
     $.ajax({
         type: 'POST',
@@ -118,8 +118,8 @@ function togglemedium(colorname){
 
 function toggledark(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Medium Wood") {
-       el.firstChild.data = "Dark Wood";
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Pokemon") {
+       el.firstChild.data = "Hello Kitty";
    }
     $.ajax({
         type: 'POST',

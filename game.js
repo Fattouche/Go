@@ -1,12 +1,9 @@
 /*
-
 Made by: Alex Fattouche 
 https://github.com/Fattouche/Go/
-
 This File is responsible for all the game functionality.
 The server will call specific functions like count score
 and checkMove throughout the game.
-
 */
 
 
@@ -41,7 +38,7 @@ function PlayMove(prevBoard,board,x,y,color){
 function countScore(board) {
   //for every empty spot on the board, search for white/black tokens and change accordingly
   var player1score=0;
-  var player2score=0;
+  var player2score=7.5;
   
   
    for (i = 0; i < board.length; i++) {
@@ -84,7 +81,7 @@ function countScore(board) {
   }
   var EndGame={
 	  Player1score:player1score,
-	  Playe2score:player2score,
+	  Player2score:player2score,
 	  Winner:winner
   }
   return EndGame;
@@ -349,4 +346,3 @@ function isSurrounded(board, x, y, color) {
   }
   return true;
 }
-
