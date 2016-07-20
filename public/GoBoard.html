@@ -1,0 +1,60 @@
+<html>
+    <head>
+    <link href='css/uppermenu.css' rel='stylesheet'>
+    <link href='css/board.css' rel='stylesheet'>
+    <link href='css/endGame.css' rel='stylesheet'>
+    <script src="jquery.min.js"></script>
+    <script src="svgFactory.js"></script>
+    <script src="script.js"></script>
+    <script src="endGame.js"></script>
+
+    <script>
+        init();
+    </script>
+    </head>
+    <body>
+
+
+		<ul>
+			<li><a href="menu.html">Play Go</a></li>
+			<li><a href="leaderboard.html">Leaderboard</a></li>
+		</ul>
+    <br></br>
+
+    <div id="pop">
+    <!-- Popup Div Starts Here -->
+      <div id="popupContact">
+      <!-- Contact Us Form -->
+        <form action="#" id="form" method="post" name="form">
+        <img id="close" src="css/x.jpg" onclick ="div_hide()">
+        <h2 id="winnerwho"></h2>
+        <hr>
+        <table>
+        <tr>
+          <td>
+            <p id="scorio1"></p>
+            <p id="scorio2"></p>
+          </td>
+        </tr>
+        </table>
+        <br></br>
+        <a href="javascript:%20playAgain()" id="viewleaderboard">Play Again</a>
+        <br>
+        <a href="javascript:%20openLeader()" id="viewleaderboard">View Leaderboard</a>
+        </form>
+      </div>
+    <!-- Popup Div Ends Here -->
+    </div>
+
+    <div class="baby" style="text-align:center;">
+        <div id='canvas' style="text-align:center;">
+
+        </div>
+    </div>
+    <div style="text-align:center;">
+	       <button id="Pass" class="button" onclick="pass()">Pass</button>
+    </div>
+
+
+    </body>
+</html>
