@@ -1,52 +1,75 @@
-
-/**
- * Requests a new board state from the server's /data route.
- * 
- * @param cb {function} callback to call when the request comes back from the server.
- */
- function getAccount(cb){
-    $.get("/data", function(data, textStatus, xhr){
-        console.log("Response for /data: "+textStatus);  
-
-        // handle any errors here....
-
-        // draw the board....
-        cb(data);  
-
+function init(){
+    $.get("/init", function(data, textStatus, xhr){
+        console.log("Response for /init : "+textStatus);  
+    }); 
+}
+ function getAllAccounts(){
+    $.get("/accounts", function(data, textStatus, xhr){
+        console.log("Response for /accounts : "+textStatus);  
+        console.log(data);
+        document.getElementById("response").innerHTML = (data[0].username + "t" + data[0].win);
     }); 
 }
 
-var mode = 0;
-var player1 = {username: null,type:null}; 
-var player2 = {username: null,type:null}
+function postAccounts(){
+    
+    $.ajax({
+        type: 'POST',
+        url : '/addAccount',
+        data : JSON.stringify({username: "hahahahah", win: 100, loss: 0}), 
+        contentType : "application/json",
+        success : function(textStatus){
+            console.log("response for /addAccount : "+textStatus);         
+        }
+    });
+}
+var mode = 0;//mode 1 == 1 player, mode 2 == 2 players
+//post mode == 2
 function twoPlayer(){
    mode = 2;
     $.ajax({
         type: 'POST',
         url : '/mode',
-        dataType: "json",
-        data : JSON.stringify(mode), 
+        data : JSON.stringify({mode : mode}), 
         contentType : "application/json",
         success : function(){
-            console.log("Response for /move" +status);            
+            console.log("Response for /mode : " +status);            
         }
     });
 }
+// post mode == 1
 function onePlayer(){
    mode = 1;
     $.ajax({
         type: 'POST',
         url : '/mode',
-        dataType: "json",
-        data : JSON.stringify(mode), 
+        data : JSON.stringify({mode : mode}), 
         contentType : "application/json",
         success : function(){
-            console.log("Response for /move"+status);            
+            console.log("Response for /mode : "+status);            
+        }
+    });
+}
+
+
+ player1 = {username: null,type:null}; //type could be "guest"."ai"."login"
+ player2 = {username: null,type:null};
+
+// post player1 and player2 with their usename and type to server
+function postPlayers(players){
+
+    $.ajax({
+        type: 'POST',
+        url : '/players',
+        data : JSON.stringify(players), 
+        contentType : "application/json",
+        success : function(textStatus){
+            console.log("response for /players : "+textStatus);         
         }
     });
 }
 function aiGuest(){
-    console.log("aaaaa ");  
+    console.log("ai and guest ");  
     player1.type = "guest";
     player2.type = "ai";
     var players = [player1,player2];
@@ -67,127 +90,220 @@ function logins(){
     var players = [player1,player2];
     postPlayers(players);
 }
-function guestes(){
+function guests(){
     player1.type = "guest";
     player2.type = "guest";
     var players = [player1,player2];
     postPlayers(players);
 }
 
-function startGame(){
-    $.get("/initBoard", function(data, textStatus, xhr){
-        console.log("Response for /initBoard: "+textStatus);  
-        drawBoard(data);  
-    }); 
-   
 
-}
-function play(){
-    var move = {x:0,y:0,c:1, pass:false};
-     $.get("/turn", function(data, textStatus, xhr){
-        console.log("Response for /turn: "+textStatus);  
-        turn = data;
-    }); 
-    $.ajax({
-        type: 'POST',
-        url : '/placeMove',
-        dataType: "json",
-        data : JSON.stringify(move), 
-        contentType : "application/json",
-        error : function(){
-            //remind error ilegal move 
-            play();
-        },
-        success : function(){
-            console.log("response for /players"+status);
-            $.get("/move", function(data, textStatus, xhr){
-                console.log("Response for /data: "+textStatus);  
-                drawBoard(data,turn);  
-             }); 
+
+function start(){
+    var isPlayAgainstAi = false;
+    $.get("/board", function(data, textStatus, xhr){
+        console.log("Response for /board : "+textStatus);  
+        $(document).ready(function(){
+        if(data.color== "lightwood"){
+            $("#canvas").css('background-image','url("../css/lightwood.png")');
         }
-    });
-    nextPlayer();
-
+        if(data.color== "mediumwood"){
+            $("#canvas").css('background-image','url("../css/mediumwood.png")');
+        }
+        if(data.color == "darkwood"){
+            $("#canvas").css('background-image','url("../css/darkwood.png")');
+        }
+        });       
+    }); 
+    $.get("/initBoard", function(data, textStatus, xhr){
+        console.log("Response for /initBoard : "+textStatus); 
+         ChangeText(sBubbles1[0]);
+        canvas = $("#canvas"); 
+        W = 600, H = 600; 
+        canvas.css("height", H); 
+        canvas.css("width", W);
+        svg = $(makeSVG(W, H));
+        drawBoard(data,click);
+    }); 
 }
+ myPix = new Array("New1.png","New2.png","New3.png");
+ sBubbles1 = new Array("Player 1 turn");
+ sBubbles2 = new Array("Player 2 turn");
+ iBubbles1 = new Array("Player 1. Invalid Move.");
+ iBubbles2 = new Array("Player 2. Invalid Move.");
+ sBubblesAi = new Array("You're Quite Terrible At This","That's A Great Move, For A Loser","Be Careful, Your Inferior Intellect Is Showing.","010101110.. Err 404. Cannot Process Stupid Move","HAHAHA, You Played Into My Hand.","Can You At Least Try To Make It A Challenge.","I Am The Unltimate GO Machine","You Really Think You Can Win? Sad.","Good Luck! =D You'll Need It After Last Time.","You're Folks Must Be Disappointed In Your Ability.","Terrible, Just Like You're Blog Posts");
+var addTextByDelay = function(text,elem,delay){
+
+  if(!elem){
+      elem = $("body");
+  }
+  if(!delay){
+      delay = 10;
+  }
+  if(text.length >0){
+      //append first character
+      elem.append(text[0]);
+      setTimeout(
+          function(){
+              //Slice text by 1 character and call function again
+              addTextByDelay(text.slice(1),elem,delay);
+           },delay
+          );
+  }
+}
+
+function ChangeText(string){
+      delay=50;
+      elem = $("#speech");
+      $("#speech").text("");
+      addTextByDelay(string, elem, delay);
+}
+
+ai=false;
+turnCounter=0;
+function play(loc){
+    var move = {x : loc.x , y :  loc.y , c : 0 , pass : false};
+    var play = null;
+    console.log("play........");
+   
+     $.get("/turn", function(data, textStatus, xhr){
+        console.log("Response for /turn: "+textStatus);
+         console.log(data);
+
+        if(data.c == 2 && data.type == "ai"){
+            console.log("llllllllllllll");
+           var randomNum = Math.floor(Math.random() * myPix.length);
+            document.getElementById("pix").src = myPix[randomNum];
+            var randomNum1 = Math.floor(Math.random() * sBubblesAi.length);
+            ChangeText(sBubblesAi[randomNum1]);
+            ai=true;
+            turnCounter++;
+        
+            setTimeout(function() {
+                $.get("/aimove", function(data, textStatus, xhr){
+                    console.log("Response for /aimove: "+textStatus); 
+                    console.log(data.board); 
+                    $('svg').remove();
+                    drawBoard(data,click);
+                    $.get("/finish", function(data, textStatus, xhr){
+                        console.log("Response for /finish: "+textStatus); 
+                        if(data.pass == 2){
+                            $.get("/score", function(data, textStatus, xhr){
+                                console.log("Response for /score: "+textStatus); 
+                                console.log(data.score);
+                             });  
+                        } 
+                    }); 
+                }); 
+            }, 1000); 
+        }else{
+            console.log("helloooooo"); 
+            move.c = data.c;
+            console.log(move);
+            $.ajax({
+                type: 'POST',
+                url : '/placeMove',
+                data : JSON.stringify(move), 
+                contentType : "application/json",
+                error : function(){
+                    if(move.c == 1){
+                        ChangeText(iBubbles1[0]);
+                    }
+                    if(move.c == 2){
+                        ChangeText(iBubbles2[0]);
+                    }    
+                },
+                success : function(data, textStatus, xhr){
+                    console.log("response for /placeMove:"+textStatus);
+                    if(move.c == 1&&!ai){
+                        ChangeText(sBubbles2[0]);
+                    }
+                    if(move.c == 2&&!ai){
+                        ChangeText(sBubbles1[0]);
+                    }
+                    $.get("/move", function(data, textStatus, xhr){
+                            console.log("Response for /move: "+textStatus);
+                            temp = data;
+                            $.get("/board", function(data, textStatus, xhr){
+                                console.log("Response for /board : "+textStatus);  
+                                if(data.mode == 1){
+                                    console.log("eeeeee");
+                                    $('svg').remove();
+                                    console.log(temp.board);
+                                    drawNewBoard(temp);
+                                }
+                                else{
+                                    console.log("mmmmmm");
+                                    $('svg').remove();
+                                    drawBoard(temp,click);
+                                }
+                            });       
+                    }); 
+                }
+            });
+        }
+    }); 
+}
+
 function pass(){
-  var move = {x:0,y:0,c:0, pass:true};
-    var turn = 0;
+  var move = {x : 0,y : 0, c : 0, pass:true};
     $.get("/turn", function(data, textStatus, xhr){
         console.log("Response for /turn: "+textStatus);  
-        turn = data;
-    }); 
-     $.ajax({
-        type: 'POST',
-        url : '/placeMove',
-        dataType: "json",
-        data : JSON.stringify(move), 
-        contentType : "application/json",
-        error : function(){
-            //remind error ilegal move 
-            play();
-        },
-        success : function(){
-            console.log("response for /placeMove"+status);      
-        }
-
-    });
-     nextPlayer();
+        move.c = data.c;
+        var temp = data.type;
+        $.ajax({
+            type: 'POST',
+            url : '/placeMove', 
+            data : JSON.stringify(move), 
+            contentType : "application/json",
+            success : function(){
+                console.log("response for /placeMove"+status);
+                $.get("/finish", function(data, textStatus, xhr){
+                    console.log("Response for /finish: "+textStatus); 
+                    if(data.pass == 2){
+                        $.get("/score", function(data, textStatus, xhr){
+                            console.log("Response for /score: "+textStatus); 
+                            console.log(data.score);
+                         });  
+                    }else{
+                        $.get("/move", function(data, textStatus, xhr){
+                            console.log("Response for /move: "+textStatus);
+                            temp = data;
+                            $.get("/board", function(data, textStatus, xhr){
+                                console.log("Response for /board : "+textStatus);  
+                                if(data.mode == 1 && temp != "ai"){
+                                    console.log("wwwwww");
+                                    $('svg').remove();
+                                    drawNewBoard(temp);
+                                }
+                                else{
+                                    console.log("yyyyyyyy");
+                                    $('svg').remove();
+                                    drawBoard(temp,click);
+                                }
+                            });       
+                        });    
+                    }     
+                });     
+            }
+        });
+    });    
 }
-/**
- * Draws the board to the #canvas element on the page. 
- *
- * You may find the following links helpful: 
- *  - https://api.jquery.com/
- *  - https://api.jquery.com/append/
- *  - http://www.tutorialspoint.com/jquery/
- *  - http://www.w3schools.com/jquery/ 
- *
- * @param state {object} - an object representing the state of the board.  
- */ 
-function drawBoard(state,turn){
 
-    var canvas = $("#canvas"); 
-	
-	$(document).ready(function(e) {
-    $('#canvas').click(function(e) {
-        //alert(e.pageX+ ' , ' + e.pageY);
-		if(turn==1){
-			 var posX = $(this).position().left,posY = $(this).position().top;
-			 alert( (e.pageX - posX-254) + ' , ' + (e.pageY - posY-94));
-			svg.append(makeCircle((e.pageX - posX-254),(e.pageY - posY-94),10,'blue'));
-			return;
-		}
-		if(turn==2){
-			var posX = $(this).position().left,posY = $(this).position().top;
-			alert( (e.pageX - posX-254) + ' , ' + (e.pageY - posY-94));
-			svg.append(makeCircle((e.pageX - posX-254),(e.pageY - posY-94),10,'red'));
-			return;
-		}
-		
-    });   
-	});
 
-    // Change the height and width of the board here...
-    // everything else should adapt to an adjustable
-    // height and width.
-    var W = 600, H = 600; 
-    canvas.css("height", H); 
-    canvas.css("width", W);
 
-    // The actual SVG element to add to. 
-    // we make a jQuery object out of this, so that 
-    // we can manipulate it via calls to the jQuery API. 
-    var svg = $(makeSVG(W, H));
-	var arr = state.board;
-    var size = state.size;
-    // TODO: Implement board drawing. 
-    
-    //  You will want to append elements to the 
-    //  svg variable using the svg.append(....) 
-    //  method. 
-	var lines = (W/(size+1));
-    var space = lines;
-    svg.append(makeRectangle(lines, lines, W-2*lines, W-2*lines, 'lavender'));
+function drawBoard(state,cb){
+    console.log("drawBoarddddd");
+
+    size=state.size;
+    svg = $(makeSVG(W, H));
+    arr =  [];
+    for(var i = 0; i < state.size; i++){
+        arr[i] =  state.board[i].slice();
+    }
+    lines = (W/(size+1));
+    space = lines;
+    //svg.append(makeRectangle(lines, lines, W-2*lines, W-2*lines,"lightwood"));
     var i=1;
     while(i<=size){
         svg.append(makeLine(lines, space, W-lines, space, 'black', 'rgb(255,0,0)'));
@@ -195,57 +311,177 @@ function drawBoard(state,turn){
         space += lines;
         i++
     }
-	
-	
+
     for(var i=0; i<arr.length; i++){
         var len = arr[i].length;
         for(var j=0; j<len; j++){
-            if(arr[i][j] == 1){
-                svg.append(makeCircle(lines + lines*i, (lines+lines*j), 10, 'blue'));
+             svg.append(makeInvisCircle(lines+lines*i, lines+lines*j, 14, 'red'));
+            if(arr[j][i] == 1){
+                svg.append(makeCircle(lines + lines*i, (lines+lines*j), 14, 'black'));
             }
-            if(arr[i][j] == 2){
-                 svg.append(makeCircle(lines+lines*i, lines+lines*j, 10, 'red'));
+            if(arr[j][i] == 2){
+                 svg.append(makeCircle(lines+lines*i, lines+lines*j, 14, 'white'));
             }
-
+           
         }
     }
-	
+    
     // append the svg object to the canvas object.
-    canvas.append(svg);
+    canvas.append(svg);   
+    cb(play);
 
 }
-function postPlayers(players){
 
-    console.log(players);  
-    $.ajax({
-        type: 'POST',
-        url : '/players',
-        dataType: "json",
-        data : JSON.stringify(players), 
-        contentType : "application/json",
-        success : function(){
-            console.log("response for /players"+status);
-             
-        }
-    });
-}
-function nextPlayer(){
-    $.get("/turn", function(data, textStatus, xhr){
-        console.log("Response for /data: "+textStatus);  
-        if(data == 2){
-            if(player2.type == "ai"){
-                $.get("/aimove", function(data, textStatus, xhr){
-                console.log("Response for /aimove: "+textStatus);  
-                drawBoard(data,2);  
-                }); 
+function drawNewBoard(state){
+    console.log("drawNewBoarddddd");
+
+    size=state.size;
+    svg = $(makeSVG(W, H));
+    arr =  [];
+    for(var i = 0; i < state.size; i++){
+        arr[i] =  state.board[i].slice();
+    } 
+    lines = (W/(size+1));
+    space = lines;
+    //svg.append(makeRectangle(lines, lines, W-2*lines, W-2*lines,"lightwood"));
+    var i=1;
+    while(i<=size){
+        svg.append(makeLine(lines, space, W-lines, space, 'black', 'rgb(255,0,0)'));
+        svg.append(makeLine(space, lines, space, W-lines, 'black', 'rgb(255,0,0'));
+        space += lines;
+        i++
+    }
+    
+    
+    for(var i=0; i<arr.length; i++){
+        var len = arr[i].length;
+        for(var j=0; j<len; j++){
+             svg.append(makeInvisCircle(lines+lines*i, lines+lines*j, 14, 'red'));
+            if(arr[j][i] == 1){
+                svg.append(makeCircle(lines + lines*i, (lines+lines*j), 14, 'black'));
             }
-        } 
-    }); 
+            if(arr[j][i] == 2){
+                 svg.append(makeCircle(lines+lines*i, lines+lines*j, 14, 'white'));
+            }
+           
+        }
+    }
+    // append the svg object to the canvas object.
+    canvas.append(svg);   
+    play({x : 0, y : 0});
+
 }
-function init(){
 
-    // do page load things here...
 
-    console.log("Initalizing Page...."); 
-    getData(drawBoard); 
+
+function click(cb){
+    var move={x : 0, y : 0, c : 0};    
+     console.log("click........");
+    $(document).ready(function(e) {
+        $('svg').click(function(e) {
+            console.log("hhhhh");
+            if(size== 9){
+                var posX = $(this).offset().left,posY = $(this).offset().top;
+                ax =(e.pageX-posX)%60;
+                ay = (e.pageY-posY)%60;
+                if(ax<30){
+                    nposX = Math.floor((e.pageX-posX)/60)*60;
+                }
+                if(ay<30){
+                    nposY = Math.floor((e.pageY-posY)/60)*60;
+                }
+                if(ax>30){
+                    nposX = Math.ceil((e.pageX-posX)/60)*60;
+                }
+              if(ay>30){
+                    nposY = Math.ceil((e.pageY-posY)/60)*60;
+                }
+                if(nposY == 0){
+                    nposY = nposY+60;
+                }
+                if(nposX == 0){
+                    nposX = nposX+60;
+                }
+                if(nposY > 540){
+                    nposY = 540;
+                }
+                if(nposX > 540){
+                    nposX = 540;
+                }
+                move.x=(nposY/60)-1;
+                move.y=(nposX/60)-1;
+               // arr[((nposY/60)-1)][((nposX/60)-1)]= 1;
+               console.log("call play1");
+                cb(move);
+            }
+            if(size == 13){
+                var posX = $(this).offset().left,posY = $(this).offset().top;
+                ax =(e.pageX-posX)%43;
+                ay = (e.pageY-posY)%43;
+                if(ax<21){
+                    nposX = Math.floor((e.pageX-posX)/43)*43;
+                }
+                if(ay<21){
+                    nposY = Math.floor((e.pageY-posY)/43)*43;
+                }
+                if(ax>21){
+                        nposX = Math.ceil((e.pageX-posX)/43)*43;
+                }
+                if(ay>21){
+                        nposY = Math.ceil((e.pageY-posY)/43)*43;
+                }
+                if(nposY == 0){
+                        nposY = nposY+43;
+                }
+                if(nposX == 0){
+                    nposX = nposX+43;
+                }
+                if(nposY > 565){
+                    nposY = 558;
+                }
+                if(nposX > 565){
+                    nposX = 558;
+                }
+                move.x=((nposY/43)-1);
+                move.y=((nposX/43)-1);
+            //arr[((nposY/43)-1)][((nposX/43)-1)]= 1;
+            console.log("call play2");
+                cb(move);
+            }
+            if(size==19){
+                var posX = $(this).offset().left,posY = $(this).offset().top;
+                ax =(e.pageX-posX)%30;
+                ay = (e.pageY-posY)%30;
+                if(ax<15){
+                    nposX = Math.floor((e.pageX-posX)/30)*30;
+                }
+                if(ay<15){
+                    nposY = Math.floor((e.pageY-posY)/30)*30;
+                }
+                if(ax>15){
+                    nposX = Math.ceil((e.pageX-posX)/30)*30;
+                }
+                if(ay>15){
+                    nposY = Math.ceil((e.pageY-posY)/30)*30;
+                }
+                if(nposY == 0){
+                    nposY = nposY+30;
+                }
+                if(nposX == 0){
+                    nposX = nposX+30;
+                }
+                if(nposY > 575){
+                    nposY = 569;
+                }
+                if(nposX > 575){
+                    nposX = 569;
+                }
+                move.x=(nposY/30)-1;
+                move.y=(nposX/30)-1;
+                //arr[((nposY/30)-1)][((nposX/30)-1)]= 1;
+                console.log("call play3");
+                cb(move);
+            }
+        });   
+    });
 }

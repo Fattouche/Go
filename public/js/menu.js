@@ -1,4 +1,8 @@
 // Validating Empty Field
+function playGuest(){
+  window.location = 'boardmenu.html';
+}
+
 function check_empty() {
   if (document.getElementById('name1').value == "" || document.getElementById('name2').value == "") {
   alert("Fill All Fields !");
@@ -38,9 +42,39 @@ function div_hide1(){
   document.getElementById('abc1').style.display = "none";
 }
 
-$("#submit").click(function () {
-   $('#form')[0].reset();
-    $("#name1").text("");
-    $("#name2").text("");
-    $("#name3").text("");
+
+
+$("#submit2").click(function () {
+   var user1 = $('#name1').val();
+   var user2 = $('#name2').val();
+   var mode = {username1: user1, username2: user2, win1: 0, win2: 0}
+   $.ajax({
+      type: 'POST',
+      url : '/addAccount',
+      dataType: "json",
+      data : JSON.stringify(mode),
+      contentType : "application/json",
+      success : function(){
+          console.log("Response for /addAccount" +status);
+      }
+  });
+      $('#form').find('#name1').val('');
+      $('#form').find('#name2').val('');
+});
+
+
+$("#submit1").click(function () {
+   var user = $('#name3').val();
+   var mode = {username: user, win: 0}
+   $.ajax({
+      type: 'POST',
+      url : '/addAccount',
+      dataType: "json",
+      data : JSON.stringify(mode),
+      contentType : "application/json",
+      success : function(){
+          console.log("Response for /addAccount" +status);
+      }
+  });
+      $('#form1').find('#name3').val('');
 });

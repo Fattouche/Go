@@ -58,7 +58,7 @@ function makeRectangle(x, y, w, h, c){
    rect.setAttribute("height", w);
    rect.setAttribute("x", x);
    rect.setAttribute("y", y);
-   
+   rect.style.fill=c;
    return rect; 
 }
 
@@ -86,6 +86,23 @@ function makeCircle(x, y, r, c){
    return circ;
 
 }
+
+function makeInvisCircle(x, y, r, c){
+
+   var circ = document.createElementNS(SVGNameSpace, "circle"); 
+
+    // Checkout docs at: http://www.w3schools.com/svg/svg_circle.asp
+    circ.setAttribute("cx", x);
+    circ.setAttribute("cy", y);
+    circ.setAttribute("r", r);
+    circ.setAttribute("fill", c)
+    circ.setAttribute("fill-opacity", "0")
+  
+   return circ;
+
+}
+
+
 
 /**
 * Makes an SVG element. 

@@ -51,12 +51,14 @@ border-top:1px solid #47ADA0
 }
 input[type=text] {
 width:82%;
+background-color: #3A3C3B;
 padding:10px;
 margin-top:30px;
-border:1px solid #ccc;
-padding-left:40px;
+border:1px solid #47ADA0;
+padding-left:10px;
 font-size:16px;
 font-family:raleway
+
 }
 #name1 {
 background-image:url(../images/name.jpg);
@@ -85,7 +87,20 @@ font-size:16px;
 font-family:raleway;
 margin-bottom:30px
 }
-#submit {
+#submit2 {
+text-decoration:none;
+width:100%;
+text-align:center;
+display:block;
+background-color:#2A2E2D;
+color:#fff;
+border:1px solid #47ADA0;
+padding:10px 0;
+font-size:20px;
+cursor:pointer;
+border-radius:5px
+}
+#guest {
 text-decoration:none;
 width:100%;
 text-align:center;

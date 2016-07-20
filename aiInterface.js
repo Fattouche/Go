@@ -1,6 +1,6 @@
 var http = require("http");
 
-
+console.log("inside of aiInterface");
 
 function getRandomMove(size, board, lastMove, cb){
 	var options = {
@@ -16,9 +16,10 @@ function getRandomMove(size, board, lastMove, cb){
 	var callback = function(response){
 		var str="";
 		response.on('data',function(chunk){
-			str+=chunk.toString();
+			str += chunk.toString();
 		});
 		response.on('end',function(){
+			console.log(str);
 			cb(JSON.parse(str));
 			console.log('no more response');
 	});

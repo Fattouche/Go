@@ -1,18 +1,35 @@
 <html>
   <head>
     <title>Leaderboard</title>
-    <link href='leaderboard.css' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" language="JavaScript">
-
-    </script>
-
+    <link href='css/leaderboard.css' rel='stylesheet' type='text/css'>
+    <link href="css/uppermenu.css" rel="stylesheet">
+    <script src="jquery.min.js"></script>
+    <script src="svgFactory.js"></script>
+    <script src="script.js"></script>
+    <script type="text/javascript" language="JavaScript"></script>
   </head>
   <body>
 
-  <ul>
-    <li><a href="menu.html">Play Go</a></li>
-    <li><a class="active" href="leaderboard.html">Leaderboard</a></li>
-  </ul>
+    <ul>
+      <li><a href="menu.html">Play Go</a></li>
+      <li><a class="active" href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+
+    <div id="box">
+      <ul id="titles">
+        <a>Account Name</a>
+        <a>Wins</a>
+      </ul>
+      <br></br>
+      <ul id="info">
+        <p id="response"></p>
+        <p></p>
+        <p></p>
+        <p></p>
+      </ul>
+      <br></br>
+      <button class="button" id="getAccounts" onClick="getAllAccounts(); ">Get Accounts/Refresh</button>
+    </div>
 
   </body>
 </html>
