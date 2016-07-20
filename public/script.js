@@ -114,7 +114,7 @@ function postPlayers(players){
 function aiGuest(){
     console.log("ai and guest ");  
     player1.type = "guest";
-    player1.username = "player 1";
+    player1.username = "Player 1";
     player2.type = "ai";
     player2.username = "AI Simon";
     var players = [player1,player2];
@@ -138,8 +138,8 @@ function logins(){
 }
 function guests(){
     player1.type = "guest";
-    player1.username = "player 1";
-    player2.username = "player 2";
+    player1.username = "Player 1";
+    player2.username = "Player 2";
     player2.type = "guest";
     var players = [player1,player2];
     postPlayers(players);
@@ -256,9 +256,9 @@ function play(loc){
                             console.log(data.score);
                             div_show();
                             if(data.score.Winner == 2){
-                                document.getElementById('winnerwho').innerHTML = p1.username+" Wins!";
-                            }else if (data.score.Winner == 1) {
                                 document.getElementById('winnerwho').innerHTML = p2.username+" Wins!";
+                            }else if (data.score.Winner == 1) {
+                                document.getElementById('winnerwho').innerHTML = p1.username+" Wins!";
                             }
         
                             document.getElementById("scorio1").innerHTML = p1.username+" Score:" + "&emsp;" + data.score.Player1score;
@@ -360,9 +360,9 @@ function pass(){
                             console.log(data.score);
                             div_show();
                             if(data.score.Winner == 2){
-                                document.getElementById('winnerwho').innerHTML = p1.username+" Wins!";
-                            }else if (data.score.Winner == 1) {
                                 document.getElementById('winnerwho').innerHTML = p2.username+" Wins!";
+                            }else if (data.score.Winner == 1) {
+                                document.getElementById('winnerwho').innerHTML = p1.username+" Wins!";
                             }
         
                             document.getElementById("scorio1").innerHTML = p1.username+" Score:" + "&emsp;" + data.score.Player1score;
