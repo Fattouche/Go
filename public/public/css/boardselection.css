@@ -1,0 +1,106 @@
+body {
+  background-image: url("img.jpg");
+  background-repeat: initial;
+}
+
+/*html, body { width: 100%; height: 100% }*/
+
+
+.dropbtn {
+    border-radius: 6px;
+    background-color: #2A2E2D;
+    color: white;
+    border: 2px solid #47ADA0;
+    padding: 90px 156px;
+    font-size: 20px;
+    cursor: pointer;
+    margin: 8px 4px;
+}
+
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #457363;
+    color: white;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #2A2E2D;
+    min-width: 300px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 20px;
+    border: .5px dotted #47ADA0;
+}
+
+
+#light{
+  background-image: url(lightwood.png);
+}
+
+#medium{
+  background-image: url(poke.jpeg);
+}
+
+#dark{
+  background-image: url(hellokitty.jpeg);
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #457363;
+  opacity: 0.5;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+.dropHolder{
+  /*display: table-cell;*/
+  text-align: center;
+  margin: 0 auto;
+}
+
+#box{
+  text-align: center;
+  box-sizing: border-box;
+  padding: 30px 5px;
+  /*display: table;*/
+  margin: 5% auto;
+  border-radius: 8px;
+  width: 1400px;
+  height: 450px;
+  background: rgba(0,0,0,0.35);
+}
+
+.button {
+  margin-left: 82.2%;
+  margin-top: 8%;
+  border-radius: 6px;
+  background-color: #2A2E2D;
+  color: white;
+  border: 2px solid #47ADA0;
+  padding: 20px 32px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.button:hover, .button:focus {
+    background-color: #457363;
+    color: white;
+}
