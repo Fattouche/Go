@@ -279,13 +279,19 @@ function play(loc){
                 contentType : "application/json",
                 error : function(data){
                      if(move.c == 1 &&data.mode == 2){
+                        $('svg').remove();
+                        drawBoard(temp,click);
                         ChangeText(iBubbles1[0]);
                     }
                      if(move.c == 2 &&data.mode == 2){
+                        $('svg').remove();
+                        drawBoard(temp,click);
                         ChangeText(iBubbles2[0]);
                     }    
                     if(move.c ==1 &&data.mode == 1){
                          var randomNum1 = Math.floor(Math.random() * sBubblesAi.length);
+                         $('svg').remove();
+                        drawBoard(temp,click);
                         changeText(iBubbles1[randomNum1]);
                     }
                 },
