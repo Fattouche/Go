@@ -251,18 +251,18 @@ function play(loc){
                     $.get("/finish", function(data, textStatus, xhr){
                         console.log("Response for /finish: "+textStatus); 
                         if(data.pass == 2){
-                           $.get("/score", function(data, textStatus, xhr){
+                            $.get("/score", function(data, textStatus, xhr){
                             console.log("Response for /score: "+textStatus);
                             console.log(data.score);
                             div_show();
                             if(data.score.Winner == 2){
-                                document.getElementById('winnerwho').innerHTML =p1.username+" Wins!";
-                            }else
-                            if (data.score.Winner == 1) {
+                                document.getElementById('winnerwho').innerHTML = p1.username+" Wins!";
+                            }else if (data.score.Winner == 1) {
                                 document.getElementById('winnerwho').innerHTML = p2.username+" Wins!";
                             }
-                            // document.getElementById('scorio1').innerHTML = "Player 1 Score:" + "&emsp;" + data.score.Player1score;
-                            // document.getElementById('scorio2').innerHTML = "Player 2 Score:" + "&emsp;" + data.score.Player2score;
+        
+                            document.getElementById("scorio1").innerHTML = p1.username+" Score:" + "&emsp;" + data.score.Player1score;
+                            document.getElementById("scorio2").innerHTML = p2.username+" Score:" + "&emsp;" + data.score.Player2score;
                          });
                         } 
                     }); 

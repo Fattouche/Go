@@ -308,7 +308,7 @@ app.post("/placeMove", function (req, res) {
         console.log("ccccccc");
         pass = 0;
         var newBoard = game.PlayMove(tempBoard1,tempBoard2,tempMove.x,tempMove.y,tempMove.c);
-        if(newBoard.Played == true || count < 2){
+        if(newBoard.Played == true ){
             console.log("dddddddd");
             count++;
             lastMove.x = tempMove.x;
@@ -398,7 +398,7 @@ function getAiMove(req, res){
         console.log("ccccccc");
         pass = 0;
         var newBoard = game.PlayMove(tempBoard1,tempBoard2,move.x,move.y,move.c);
-        if(newBoard.Played == true || count < 2){
+        if(newBoard.Played == true ){
             console.log("dddddddd");
             count++;
             lastMove.x = move.x;
