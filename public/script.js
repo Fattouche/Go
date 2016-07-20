@@ -277,26 +277,32 @@ function play(loc){
                 url : '/placeMove',
                 data : JSON.stringify(move), 
                 contentType : "application/json",
-                error : function(data){
-                     if(move.c == 1 &&data.mode == 2){
-                        $('svg').remove();
-                        drawBoard(temp,click);
+                error : function(){
+                    
+                     if(move.c == 1 &&modemode == 2){
+                        console.log("invalid 1");
                         ChangeText(iBubbles1[0]);
-                    }
-                     if(move.c == 2 &&data.mode == 2){
                         $('svg').remove();
                         drawBoard(temp,click);
+                    }
+                     if(move.c == 2 &&modemode == 2){
+                             console.log("invalid 2");
                         ChangeText(iBubbles2[0]);
+                        $('svg').remove();
+                        drawBoard(temp,click);
                     }    
-                    if(move.c ==1 &&data.mode == 1){
+                    if(move.c ==1 &&modemode == 1){
+                             console.log("invalid 3");
+                          changeText(iBubbles1[randomNum1]);
                          var randomNum1 = Math.floor(Math.random() * sBubblesAi.length);
                          $('svg').remove();
                         drawBoard(temp,click);
-                        changeText(iBubbles1[randomNum1]);
+                      
                     }
                 },
                 success : function(data, textStatus, xhr){
                     console.log("response for /placeMove:"+textStatus);
+                         modemode=data.mode;
                      if(move.c == 1&& data.mode == 2){
                         
                             ChangeText(sBubbles2[0]);

@@ -325,7 +325,7 @@ app.post("/placeMove", function (req, res) {
             }   
             res.status(200).json({mode:board.mode}); 
         }else{
-            res.status(403).send({mode:board.mode});  
+            res.status(403).send();  
         }
     }
 
