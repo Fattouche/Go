@@ -41,11 +41,11 @@ function toggle9(sizename){
    }
    $.ajax({
         type: 'POST',
-        url : '/size',  
-        data : JSON.stringify({size: 9}), 
+        url : '/size',
+        data : JSON.stringify({size: 9}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /size : "+textStatus);       
+            console.log("response for /size : "+textStatus);
         }
     });
 
@@ -59,10 +59,10 @@ function toggle13(sizename){
     $.ajax({
         type: 'POST',
         url : '/size',
-        data : JSON.stringify({size: 13}), 
+        data : JSON.stringify({size: 13}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /size : "+textStatus);       
+            console.log("response for /size : "+textStatus);
         }
     });
 }
@@ -75,26 +75,26 @@ function toggle19(sizename){
    $.ajax({
         type: 'POST',
         url : '/size',
-        data : JSON.stringify({size: 19}), 
+        data : JSON.stringify({size: 19}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /size : "+textStatus);       
+            console.log("response for /size : "+textStatus);
         }
     });
 }
 
 function togglelight(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Medium Wood" || el.firstChild.data == "Dark Wood"){
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Pokemon" || el.firstChild.data == "Hello Kitty"){
        el.firstChild.data = "Light Wood";
    }
    $.ajax({
         type: 'POST',
         url : '/color',
-        data : JSON.stringify({color: "lightwood"}), 
+        data : JSON.stringify({color: "lightwood"}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /color : "+textStatus);       
+            console.log("response for /color : "+textStatus);
         }
     });
 
@@ -102,32 +102,32 @@ function togglelight(colorname){
 
 function togglemedium(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Dark Wood") {
-       el.firstChild.data = "Medium Wood";
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Hello Kitty") {
+       el.firstChild.data = "Pokemon";
    }
     $.ajax({
         type: 'POST',
         url : '/color',
-        data : JSON.stringify({color: "mediumwood"}), 
+        data : JSON.stringify({color: "mediumwood"}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /color : "+textStatus);       
+            console.log("response for /color : "+textStatus);
         }
     });
 }
 
 function toggledark(colorname){
    var el = document.getElementById('colorname');
-   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Medium Wood") {
-       el.firstChild.data = "Dark Wood";
+   if (el.firstChild.data == "Board Color" || el.firstChild.data == "Light Wood" || el.firstChild.data == "Pokemon") {
+       el.firstChild.data = "Hello Kitty";
    }
     $.ajax({
         type: 'POST',
         url : '/color',
-        data : JSON.stringify({color: "darkwood"}), 
+        data : JSON.stringify({color: "darkwood"}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /color : "+textStatus);       
+            console.log("response for /color : "+textStatus);
         }
     });
 }
@@ -140,10 +140,10 @@ function toggleplay1(handiname){
    $.ajax({
         type: 'POST',
         url : '/handi',
-        data : JSON.stringify({handi: 1}), 
+        data : JSON.stringify({handi: 1}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /handi : "+textStatus);       
+            console.log("response for /handi : "+textStatus);
         }
     });
 }
@@ -156,10 +156,10 @@ function toggleplay2(handiname){
     $.ajax({
         type: 'POST',
         url : '/handi',
-        data : JSON.stringify({handi: 2}), 
+        data : JSON.stringify({handi: 2}),
         contentType : "application/json",
         success : function(data,textStatus,xhr){
-            console.log("response for /handi : "+textStatus);       
+            console.log("response for /handi : "+textStatus);
         }
     });
 }

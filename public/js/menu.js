@@ -52,6 +52,7 @@ function check_empty3() {
   alert("Fill All Fields !");
   } else {
     postAccounts();
+    getMainAccounts();
     $.get("/board", function(data, textStatus, xhr){
         if(data.mode == 2){
             createLogin2();

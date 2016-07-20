@@ -136,7 +136,7 @@ function aiLogin(){
 }
 function logins(){
     player1.type = "login";
-    play1.username = document.getElementById('name1').value;
+    player1.username = document.getElementById('name1').value;
     player2.type = "login";
     player2.username = document.getElementById('name2').value;
     var players = [player1,player2];
