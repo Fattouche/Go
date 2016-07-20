@@ -308,7 +308,7 @@ app.post("/placeMove", function (req, res) {
         console.log("ccccccc");
         pass = 0;
         var newBoard = game.PlayMove(tempBoard1,tempBoard2,tempMove.x,tempMove.y,tempMove.c);
-        if(newBoard.Played == true || count < 4){
+        if(newBoard.Played == true || count < 2){
             console.log("dddddddd");
             count++;
             lastMove.x = tempMove.x;

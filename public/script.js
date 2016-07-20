@@ -167,8 +167,8 @@ function start(){
             myPix = new Array("New1.png","New2.png","New3.png");
              sBubbles1 = new Array(p1.username + " turn");
              sBubbles2 = new Array(p2.username + " turn");
-             iBubbles1 = new Array("Player 1. Invalid Move.");
-             iBubbles2 = new Array("Player 2. Invalid Move.");
+             iBubbles1 = new Array(p1.username + " Invalid Move.");
+             iBubbles2 = new Array(p2.username + " Invalid Move.");
              ibubblesAI= new Array("Thats not even a valid move, scrub","Atleast you get to try again, unlike your midterm");
              pbubblesAI= new Array("Good thing you passed, unlike your midterm");
              sBubblesAi = new Array("Your strategy makes me UMLOL","Im the reason its called the Master branch","If you were a exception, no one would want to catch you.","I Am The Unltimate GO Machine","Good Luck! You'll Need It After Last Time.","Terrible, Just Like Your Blog Posts");
