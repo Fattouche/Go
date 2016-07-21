@@ -100,13 +100,56 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
   //check that the KO rule hasnt been broken
   NewBoard[x][y]=color;
   if (PreviousBoard.toString() === NewBoard.toString()) {
+	  console.log("KO KO KO!");
   		NewBoard[x][y] = 0;
 		return false;
   }
   NewBoard[x][y]=0;
   //check that the token isnt suiciding
+  if(color==1)
+	  enemy=2
+  if(color==2)
+	  enemy=1
+  board3=JSON.parse(JSON.stringify(NewBoard));
   if (isSurrounded(NewBoard, x, y, color)) {
-    return false;
+	  console.log("Surrounded!");
+		if(x-1>=0){
+			board3[x][y]=color;
+			if(isSurrounded(board3,x-1,y,enemy)){
+				NewBoard[x-1][y]=0;
+				return true;
+				console.log("Surrounded1");
+			}
+			board3[x][y]=0;
+		}
+		if(y-1>=0){
+			board3[x][y]=color;
+			if(isSurrounded(board3,x,y-1,enemy)){
+				NewBoard[x][y-1]=0;
+				 console.log("Surrounded2");
+				return true;
+			}
+			board3[x][y]=0;
+		}
+		if(y+1<board3.length){
+			board3[x][y]=color;
+			if(isSurrounded(board3,x,y+1,enemy)){
+				NewBoard[x][y+1]=0;
+				 console.log("Surrounded3");
+				return true;
+			}
+			board3[x][y]=0;
+		}
+		if(x+1<board3.length){
+			board3[x][y]=color;
+			if(isSurrounded(board3,x+1,y,enemy)){
+				NewBoard[x+1][y]=0;
+				 console.log("Surrounded4");
+				return true;
+			}
+			board3[x][y]=0;
+		}
+      return false;
   }
   console.log("inside 4");
   return true;
