@@ -21,4 +21,4 @@ To run the applicatiom:
       On	Mac/Linux: open	a	terminal window and	type:mongod
                      open	another	terminal	window	and	type:mongo
 
-Navigate to `http://localhost:3000/boardMenu.html` to view the web appliation.
+Navigate to `http://localhost:30044/menu.html` to view the web appliation.
