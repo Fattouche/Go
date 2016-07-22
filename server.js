@@ -26,6 +26,7 @@ var pass = 0;
 var boardState = {board : null, size : 0}; 
 var oldBoard1 = [];
 var oldBoard2 = [];
+var oldBoard3 = [];
 var lastMove = {x : 0, y : 0, c : 0, pass:false}; 
 var islegal = null;
 var turn = {type: null, c : 1};// start with player 1, alternative change between 1 and 2
@@ -48,8 +49,8 @@ function generateBoard(){
     setHandi(state.board);
     for (var i = 0; i < state.size; i++){
     oldBoard2[i] = state.board[i].slice();
-    oldBoard1 [i]= state.board[i].slice();
-
+    oldBoard1[i] = state.board[i].slice();
+    oldBoard3[i] = state.board[i].slice();
     }
     return state; 
 }
@@ -67,7 +68,7 @@ if(board.handicap == 1 ){
             arr[3][3] = 1;
             arr[3][9] = 1;
             arr[9][3] = 1;
-            arr[6][6] = 1;
+            arr[9][9] = 1;
         }
         if(board.size == 19){
             arr[3][3] = 1;
@@ -89,7 +90,7 @@ if(board.handicap == 1 ){
             arr[3][3] = 2;
             arr[3][9] = 2;
             arr[9][3] = 2;
-            arr[6][6] = 2;
+            arr[9][9] = 2;
         }
         if(board.size == 19){
             arr[3][3] = 2;
@@ -287,20 +288,23 @@ app.post("/placeMove", function (req, res) {
         res.status(200).json({mode : board.mode});  
     }else if(pass<2){
         for(var i = 0; i < board.size; i++){
-        oldBoard1[i] = oldBoard2[i].slice();
+            oldBoard3[i] = oldBoard2[i].slice();
+        }
+        for(var i = 0; i < board.size; i++){
+        oldBoard2[i] = oldBoard1[i].slice();
         
         }
         for(var i = 0; i < board.size; i++){
-            oldBoard2[i] = boardState.board[i].slice();
+            oldBoard1[i] = boardState.board[i].slice();
         }
         var tempBoard1 = [];
         var tempBoard2 = [];
         for(var i = 0; i < board.size; i++){
-            tempBoard2[i] = oldBoard2[i].slice();
+            tempBoard2[i] = oldBoard1[i].slice();
         
         }
         for(var i = 0; i < board.size; i++){
-            tempBoard1[i] = oldBoard1[i].slice();
+            tempBoard1[i] = oldBoard3[i].slice();
         }
 
         console.log(oldBoard1);
@@ -377,23 +381,28 @@ function getAiMove(req, res){
         }
     }else if(pass<2){
         for(var i = 0; i < board.size; i++){
-            oldBoard1[i] = oldBoard2[i].slice();
+            oldBoard3[i] = oldBoard2[i].slice();
+        }
+
+        for(var i = 0; i < board.size; i++){
+            oldBoard2[i] = oldBoard1[i].slice();
         
         }
         for(var i = 0; i < board.size; i++){
-            oldBoard2[i] = boardState.board[i].slice();
+            oldBoard1[i] = boardState.board[i].slice();
         }
+
 
     console.log(oldBoard1);
     console.log(oldBoard2);
         var tempBoard1 = [];
         var tempBoard2 = [];
         for(var i = 0; i < board.size; i++){
-            tempBoard2[i] = oldBoard2[i].slice();
+            tempBoard2[i] = oldBoard1[i].slice();
         
         }
         for(var i = 0; i < board.size; i++){
-            tempBoard1[i] = oldBoard1[i].slice();
+            tempBoard1[i] = oldBoard2[i].slice();
         }
         console.log("ccccccc");
         pass = 0;

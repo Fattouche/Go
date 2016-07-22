@@ -165,13 +165,13 @@ function start(){
             p1 = data.player1;
             p2 = data.player2;
             myPix = new Array("New1.png","New2.png","New3.png");
-             sBubbles1 = new Array(p1.username + " turn");
-             sBubbles2 = new Array(p2.username + " turn");
-             iBubbles1 = new Array(p1.username + " Invalid Move.");
-             iBubbles2 = new Array(p2.username + " Invalid Move.");
-             ibubblesAI= new Array("Thats not even a valid move, scrub","Atleast you get to try again, unlike your midterm");
-             pbubblesAI= new Array("Good thing you passed, unlike your midterm");
-             sBubblesAi = new Array("Your strategy makes me UMLOL","Im the reason its called the Master branch","If you were a exception, no one would want to catch you.","I Am The Unltimate GO Machine","Good Luck! You'll Need It After Last Time.","Terrible, Just Like Your Blog Posts");
+             sBubbles1 = new Array(p1.username + "'s turn");
+             sBubbles2 = new Array(p2.username + "'s turn");
+             iBubbles1 = new Array(p1.username + " Invalid Move. Try again!");
+             iBubbles2 = new Array(p2.username + " Invalid Move. Try again!");
+             ibubblesAI= new Array("Thats not even a valid move, scrub.","At least you get to try again, unlike your midterm.");
+             pbubblesAI= new Array("Good thing you passed, unlike your midterm.");
+             sBubblesAi = new Array("Your strategy makes me UMLOL.","Im the reason its called the Master branch.","If you were a exception, no one would want to catch you.","I Am The Ultimate GO Machine","Good Luck! You'll Need It After Last Time.","Terrible, Just Like Your Blog Posts");
             $.get("/initBoard", function(data, textStatus, xhr){
                 console.log("Response for /initBoard : "+textStatus); 
                 changeTextFast(sBubbles1[0]);

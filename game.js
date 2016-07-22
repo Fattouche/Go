@@ -90,7 +90,11 @@ function countScore(board) {
 //previousboard and newboard are the arrays, move is an object
 //Previous board is the board state from before your opponents last turn
 function checkMove(PreviousBoard, NewBoard, x, y, color) {
+	console.log('WE ARE CHECKING THE MOVE!!');
   //check that the spot is open
+  console.log("here is the board hhhhhh");
+  console.log(PreviousBoard);
+  console.log(NewBoard);
   console.log("inside checkMove");
   if (NewBoard[x][y]!== 0) {
   	  console.log(NewBoard[x][y]);
@@ -98,13 +102,7 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
   }
   
   //check that the KO rule hasnt been broken
-  NewBoard[x][y]=color;
-  if (PreviousBoard.toString() === NewBoard.toString()) {
-	  console.log("KO KO KO!");
-  		NewBoard[x][y] = 0;
-		return false;
-  }
-  NewBoard[x][y]=0;
+
   //check that the token isnt suiciding
   if(color==1)
 	  enemy=2
@@ -117,8 +115,13 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
 			board3[x][y]=color;
 			if(isSurrounded(board3,x-1,y,enemy)){
 				NewBoard[x-1][y]=0;
-				return true;
 				console.log("Surrounded1");
+				if (PreviousBoard.toString() === NewBoard.toString()) {
+		  			console.log("KO KO KO!");
+	  				NewBoard[x][y] = 0;
+					return false;
+  				}		
+  				return true;
 			}
 			board3[x][y]=0;
 		}
@@ -127,6 +130,11 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
 			if(isSurrounded(board3,x,y-1,enemy)){
 				NewBoard[x][y-1]=0;
 				 console.log("Surrounded2");
+				 if (PreviousBoard.toString() === NewBoard.toString()) {
+			  		console.log("KO KO KO!");
+		  			NewBoard[x][y] = 0;
+					return false;
+  				}
 				return true;
 			}
 			board3[x][y]=0;
@@ -136,6 +144,11 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
 			if(isSurrounded(board3,x,y+1,enemy)){
 				NewBoard[x][y+1]=0;
 				 console.log("Surrounded3");
+				 if (PreviousBoard.toString() === NewBoard.toString()) {
+			  		console.log("KO KO KO!");
+		  			NewBoard[x][y] = 0;
+					return false;
+  				}
 				return true;
 			}
 			board3[x][y]=0;
@@ -145,12 +158,19 @@ function checkMove(PreviousBoard, NewBoard, x, y, color) {
 			if(isSurrounded(board3,x+1,y,enemy)){
 				NewBoard[x+1][y]=0;
 				 console.log("Surrounded4");
+				 if (PreviousBoard.toString() === NewBoard.toString()) {
+			  		console.log("KO KO KO!");
+		  			NewBoard[x][y] = 0;
+					return false;
+  				}	
 				return true;
 			}
 			board3[x][y]=0;
 		}
+		
       return false;
   }
+
   console.log("inside 4");
   return true;
 }
