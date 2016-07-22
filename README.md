@@ -12,7 +12,7 @@ The implementation follows the functional requirements specified in the design a
 
 To run the applicatiom: 
 
-1. Checkout/download the code: `git clone https://github.com/Fattouche/Go/'
+1. Checkout/download the code on the master branch: `git clone https://github.com/Fattouche/Go/'
 2. Download the dependencies:a)'npm install jquery' b) 'npm install body-parser' c)'npm install mongodb' d)'npm install express'
 2. Start the server: open command prompt and navigate to folder type: `node server.js` (You must download Node if not already installed)
 3. Start the database :
